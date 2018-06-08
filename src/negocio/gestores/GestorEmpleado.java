@@ -5,11 +5,8 @@
  */
 package negocio.gestores;
 
-import java.util.ArrayList;
-import negocio.modelos.Disponibilidad;
+
 import negocio.modelos.Empleado;
-import negocio.modelos.Rol;
-import negocio.modelos.VinculacionConLaEmpresa;
 import org.json.JSONObject;
 import persistencia.FachadaPersistencia;
 
@@ -38,13 +35,11 @@ public class GestorEmpleado {
         return new Empleado (js);
     }
     public Empleado getEmpleado(String dni){
-        
-        Empleado empleado = null;
+           
         JSONObject consulta;
-        
-        ArrayList<Rol> roles;
-        ArrayList<Disponibilidad> disponibilidades;
-        ArrayList<VinculacionConLaEmpresa> vinculaciones;
+        consulta = fachada.readEmpleado(dni);
+        System.err.println(consulta.toString());
+        Empleado empleado = new Empleado(consulta);
         
         return empleado;
     }

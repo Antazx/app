@@ -20,16 +20,19 @@ import org.json.JSONException;
  * @author GUillermo
  */
 public class FachadaPersistencia {
-
-    private static String dbURL = "jdbc:derby://localhost:1527/DisBD";
+    private static String dbURL = "jdbc:derby://localhost:1527/BDDis";
+    // jdbc Connection
     private static Connection conn = null;
     
     public FachadaPersistencia() {
-    
-        try {
+        try
+        {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-            conn = DriverManager.getConnection(dbURL);
-        } catch (Exception e) {
+            //Get a connection
+            conn = DriverManager.getConnection(dbURL); 
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }

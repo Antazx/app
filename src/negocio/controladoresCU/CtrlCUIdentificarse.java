@@ -5,7 +5,9 @@
  */
 package negocio.controladoresCU;
 
+import negocio.gestores.GestorEmpleado;
 import negocio.modelos.Empleado;
+import org.json.JSONObject;
 
 /**
  *
@@ -16,6 +18,9 @@ public class CtrlCUIdentificarse {
     private Empleado empleado;
     
     public Empleado getEmpleado(String dni){
-        empleado = GestorEmpleado.getI
+        GestorEmpleado gestor = GestorEmpleado.getInstance();
+        empleado = gestor.getEmpleado(dni);
+        System.out.println(empleado.toString());
+        return empleado;
     }
 }

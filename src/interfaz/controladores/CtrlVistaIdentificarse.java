@@ -6,6 +6,7 @@
 package interfaz.controladores;
 
 import interfaz.vistas.VistaIdentificarse;
+import negocio.controladoresCU.CtrlCUIdentificarse;
 
 /**
  *
@@ -14,9 +15,11 @@ import interfaz.vistas.VistaIdentificarse;
 public class CtrlVistaIdentificarse {
     
     private VistaIdentificarse vista;
-        
+    private CtrlCUIdentificarse controladorCU;
+    
     public CtrlVistaIdentificarse(VistaIdentificarse vista){
         this.vista = vista;
+        controladorCU = new CtrlCUIdentificarse();
     }
     
     public void procesaEventoIntroduceDatos(){
@@ -30,6 +33,7 @@ public class CtrlVistaIdentificarse {
             if(pass != null){
                 if(compruebaDatos(dni, pass)){
                     System.err.println("PASA BIEN");
+                    controladorCU.getEmpleado(dni);
                 } else {
                     vista.errorDni();
                 }
