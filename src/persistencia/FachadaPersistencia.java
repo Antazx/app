@@ -57,7 +57,7 @@ public class FachadaPersistencia {
                 JSONArray list;
                 
                 json.put("nombre" , rs.getString("NOMBRE"));
-                json.put("fechaIni", rs.getDate("FECHAINICIOEMPRESA"));
+                json.put("fechaIni", rs.getDate("FECHAINICIOENEMPRESA"));
                 json.put("password", rs.getString("PASSWORD"));
                 
                 list = getRoles(dni);
@@ -83,7 +83,7 @@ public class FachadaPersistencia {
         JSONArray list;
         JSONObject obj;
         
-        PreparedStatement stmt = conn.prepareStatement("select * from TIPOROL");
+        PreparedStatement stmt = conn.prepareStatement("select * from TIPODEROL");
         ResultSet rs = stmt.executeQuery();
         
         while (rs.next()){
@@ -91,7 +91,7 @@ public class FachadaPersistencia {
         }
         
         list = new JSONArray(new ArrayList());
-        stmt = conn.prepareStatement("select * from ROLESENLAEMPRESA where EMPLEADO = ?");
+        stmt = conn.prepareStatement("select * from ROLESENEMPRESA where EMPLEADO = ?");
         stmt.setString(1, dni);
         rs = stmt.executeQuery();
         
@@ -138,7 +138,7 @@ public class FachadaPersistencia {
         JSONArray list;
         JSONObject obj;
         
-        PreparedStatement stmt = conn.prepareStatement("select * from TIPOVINCULACION");
+        PreparedStatement stmt = conn.prepareStatement("select * from TIPODEVINCULACION");
         ResultSet rs = stmt.executeQuery();
         while(rs.next()){
             tipoVinc[rs.getInt("IDTIPO")]=rs.getString("NOMBRETIPO");

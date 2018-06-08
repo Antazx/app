@@ -29,7 +29,7 @@ public class Empleado {
     public Empleado(JSONObject js) {
         try{
         
-                this.fechaIni = LocalDate.parse(js.getString("fechaIni"));
+                this.fechaIni = ((java.sql.Date) js.get("fechaIni")).toLocalDate();
                 this.nombre = js.getString("nombre");
                 this.password = js.getString("password");
                 
