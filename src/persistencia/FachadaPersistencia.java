@@ -42,7 +42,7 @@ public class FachadaPersistencia {
     }
     
     public JSONObject readEmpleado(String dni){
-        JSONObject json = new JSONObject();
+        JSONObject json = null;
         
         try{
         
@@ -52,10 +52,9 @@ public class FachadaPersistencia {
             ResultSet rs = stmt.executeQuery();
             
             if(rs.next()){
-            
-                JSONObject obj;
-                JSONArray list;
                 
+                JSONArray list;
+                json = new JSONObject();
                 json.put("nombre" , rs.getString("NOMBRE"));
                 json.put("fechaIni", rs.getDate("FECHAINICIOENEMPRESA"));
                 json.put("password", rs.getString("PASSWORD"));

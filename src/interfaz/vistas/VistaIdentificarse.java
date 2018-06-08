@@ -21,7 +21,7 @@ public class VistaIdentificarse extends javax.swing.JFrame {
     public VistaIdentificarse() {
         controlador = new CtrlVistaIdentificarse(this);
         initComponents();
-        errorDNI.setVisible(false);
+        error.setVisible(false);
     }
     
     public String getDni(){
@@ -47,7 +47,7 @@ public class VistaIdentificarse extends javax.swing.JFrame {
         passField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        errorDNI = new javax.swing.JLabel();
+        error = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +62,11 @@ public class VistaIdentificarse extends javax.swing.JFrame {
         });
 
         jButton1.setText("Cancelar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton1MousePressed(evt);
+            }
+        });
 
         jButton2.setText("Continuar");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -73,8 +78,8 @@ public class VistaIdentificarse extends javax.swing.JFrame {
             }
         });
 
-        errorDNI.setForeground(new java.awt.Color(255, 51, 51));
-        errorDNI.setText("El DNI introducido no es valido");
+        error.setForeground(new java.awt.Color(255, 51, 51));
+        error.setText("El DNI introducido no es valido");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,7 +103,7 @@ public class VistaIdentificarse extends javax.swing.JFrame {
                             .addComponent(passField)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(errorDNI)))
+                        .addComponent(error)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -108,13 +113,13 @@ public class VistaIdentificarse extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dni)
                     .addComponent(dniField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(errorDNI)
-                .addGap(19, 19, 19)
+                .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(password)
                     .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(error)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -154,17 +159,17 @@ public class VistaIdentificarse extends javax.swing.JFrame {
         // TODO add your handling code here:
          controlador.procesaEventoIntroduceDatos();
     }//GEN-LAST:event_jButton2MousePressed
+
+    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_jButton1MousePressed
     
-    public void errorPassNull(){
-        dni.setBackground(Color.red);
-    }
     
-    public void errorDniNull(){
-        password.setBackground(Color.red);
-    }
-    
-    public void errorDni() {
-        errorDNI.setVisible(true);
+    public void mostrarError(String text) {
+        error.setText(text);
+        error.setVisible(true);
     }
     /**
      * @param args the command line arguments
@@ -204,13 +209,15 @@ public class VistaIdentificarse extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dni;
     private javax.swing.JTextField dniField;
-    private javax.swing.JLabel errorDNI;
+    private javax.swing.JLabel error;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField passField;
     private javax.swing.JLabel password;
     // End of variables declaration//GEN-END:variables
+
+   
 
     
 }

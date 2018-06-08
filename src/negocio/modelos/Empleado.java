@@ -27,7 +27,9 @@ public class Empleado {
     ArrayList<VinculacionConLaEmpresa> vinculacionesConLaEmpresa;
 
     public Empleado(JSONObject js) {
-        try{
+        
+        if(js != null){
+            try{
         
                 this.fechaIni = ((java.sql.Date) js.get("fechaIni")).toLocalDate();
                 this.nombre = js.getString("nombre");
@@ -59,10 +61,77 @@ public class Empleado {
                     vinculacionesConLaEmpresa.add(vin);
                 }
         
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        } 
+    }
+    public String getRolActual(){
+        /*String tipoRol = "";
+        LocalDate fechaProxima;
         
+        Rol rol;
+        ArrayList<Rol> rolesComp = this.getRoles();
+        
+        rol = rolesComp.get(0);
+        fechaProxima = rol.getComienzoEnRol();
+        for (int i = 0; i < rolesComp.size(); i++){
+            rol = rolesComp.get(i);
+            if(rol.getComienzoEnRol().isAfter(fechaProxima)){
+                tipoRol = rol.getTipoRol();
+                fechaProxima = rol.getComienzoEnRol();
+            }
+        }*/
+        
+        return "Supervisor";
+    }
+    
+    public String getVinculacionActual(){
+       /*String tipoVin = "";
+       LocalDate fechaProxima;
+       
+       VinculacionConLaEmpresa vin;
+       ArrayList<VinculacionConLaEmpresa> vinComp= this.getVinculaciones();
+       
+       vin = vinComp.get(0);
+       fechaProxima = vin.getFechaInicio();
+       
+       for(int i = 0; i < vinComp.size(); i++){
+           vin = vinComp.get(i);
+           if(vin.getFechaInicio().isAfter(fechaProxima)){
+               tipoVin = vin.getVinculacion();
+               fechaProxima = vin.getFechaInicio();
+           }
+       }*/
+       
+       return "Contratado";
+    }
+    public String getDisponibilidadActual(){
+        /*String tipoDisp = "";
+        LocalDate fechaProxima;
+        Disponibilidad disp;
+        ArrayList<Disponibilidad> dispComp = this.getDisponibilidades();
+        
+        disp = dispComp.get(0);
+        fechaProxima = disp.get
+        for (int i = 0; i < disponibilidades.size(); i++){
+            disp = 
+        }*/
+        return "Trabajando";
+    }
+   
+    public String getPassword() {
+        return password;
+    }
+    
+    public ArrayList<VinculacionConLaEmpresa> getVinculaciones(){
+        return vinculacionesConLaEmpresa;
+    }
+    public ArrayList<Disponibilidad> getDisponibilidades(){
+        return disponibilidades;
+    }
+    public ArrayList<Rol> getRoles(){
+        return roles;
     }
     
     

@@ -32,4 +32,13 @@ public class Disponibilidad {
         }
     }
     
+    public LocalDate getComienzo(){
+        return comienzo;
+    }
+    public LocalDate getFinPrevisto(){
+        return finPrevisto;
+    }
+    public String getDisponibilidad(){
+        return disponibilidad;
+    }
 }

@@ -7,7 +7,7 @@ package negocio.controladoresCU;
 
 import negocio.gestores.GestorEmpleado;
 import negocio.modelos.Empleado;
-import org.json.JSONObject;
+
 
 /**
  *
@@ -16,11 +16,29 @@ import org.json.JSONObject;
 public class CtrlCUIdentificarse {
     
     private Empleado empleado;
-    
-    public Empleado getEmpleado(String dni){
-        GestorEmpleado gestor = GestorEmpleado.getInstance();
-        empleado = gestor.getEmpleado(dni);
-        System.out.println(empleado.toString());
-        return empleado;
+
+
+    public String identificarEmpleado(String dni, String pass) {
+        
+       GestorEmpleado gestor = GestorEmpleado.getInstance();
+       empleado = gestor.getEmpleado(dni);
+       System.out.println(empleado.toString());
+       if (empleado != null){
+           if(empleado.getPassword().equals(pass)){
+                if(empleado.getVinculacionActual().equals("Contratado")
+                        && empleado.getDisponibilidadActual().equals("Trabajando")){
+                        return empleado.getRolActual();
+                }else{
+                    System.out.println("NoActivo" +empleado.getVinculacionActual() +" " +empleado.getDisponibilidadActual());
+                    return "NoActivo";
+                }
+           }else{
+               System.out.println("Contraseña Incorrecta");
+               return "PassIncorrecta";
+           }
+       }else{
+           System.out.println("NoExiste");
+           return "NoExiste";
+       }
     }
 }

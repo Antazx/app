@@ -5,8 +5,10 @@
  */
 package interfaz.controladores;
 
+import interfaz.gestor.GestorInterfaces;
 import interfaz.vistas.VistaIdentificarse;
 import negocio.controladoresCU.CtrlCUIdentificarse;
+import negocio.gestores.GestorEmpleado;
 
 /**
  *
@@ -26,26 +28,31 @@ public class CtrlVistaIdentificarse {
         
         String dni = vista.getDni();
         String pass = vista.getPassword();
+        String respuesta = "";
         
-        if(dni != null){//No está funcionando, pasa aunque sea null
-            
-            
-            if(pass != null){
-                if(compruebaDatos(dni, pass)){
-                    System.err.println("PASA BIEN");
-                    controladorCU.getEmpleado(dni);
-                } else {
-                    vista.errorDni();
-                }
-            }else{
-                vista.errorPassNull();
+        if(compruebaDatos(dni)){
+            respuesta = controladorCU.identificarEmpleado(dni,pass);
+            switch(respuesta){
+                case "NoExiste":
+                    vista.mostrarError("No existe el usuario");
+                    break;
+                case "PassIncorrecta":
+                    vista.mostrarError("La contraseña no es correcta");
+                    break;
+                case "NoActivo":
+                    vista.mostrarError("Usuario Inactivo");
+                    break;
+                default:
+                    System.out.println("Rol encontrado: " +respuesta);
+                    GestorInterfaces.getInstancia().empleadoIdentificado(respuesta);
+                    break;
             }
-        }else{
-            vista.errorDniNull();
+        } else {
+            vista.mostrarError("El DNI no es valido");
         }
     }
     
-    public boolean compruebaDatos(String dni, String pass){
+    public boolean compruebaDatos(String dni){
         boolean ok = false;
         
         if (dni.length() == 9){

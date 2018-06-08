@@ -19,7 +19,7 @@ public class VinculacionConLaEmpresa {
     private String vinculo;
     private LocalDate inicio;
     
-    VinculacionConLaEmpresa(JSONObject jsonObject) {
+    public VinculacionConLaEmpresa(JSONObject jsonObject) {
        try{
            this.vinculo = jsonObject.getString("vinculo");
            this.inicio = ((java.sql.Date)jsonObject.get("inicio")).toLocalDate();
@@ -28,4 +28,11 @@ public class VinculacionConLaEmpresa {
         }
     }
     
+    public LocalDate getFechaInicio(){
+        return inicio;
+    }
+    
+    public String getVinculacion(){
+        return vinculo;
+    }
 }
