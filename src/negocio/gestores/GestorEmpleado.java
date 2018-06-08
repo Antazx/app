@@ -5,6 +5,12 @@
  */
 package negocio.gestores;
 
+import java.util.ArrayList;
+import negocio.modelos.Disponibilidad;
+import negocio.modelos.Empleado;
+import negocio.modelos.Rol;
+import negocio.modelos.VinculacionConLaEmpresa;
+import org.json.JSONObject;
 import persistencia.FachadaPersistencia;
 
 /**
@@ -26,5 +32,20 @@ public class GestorEmpleado {
         }else {
             return gestorEmpleado;
         }
+    }
+    
+    public Empleado getEmpleado(JSONObject js){
+        return new Empleado (js);
+    }
+    public Empleado getEmpleado(String dni){
+        
+        Empleado empleado = null;
+        JSONObject consulta;
+        
+        ArrayList<Rol> roles;
+        ArrayList<Disponibilidad> disponibilidades;
+        ArrayList<VinculacionConLaEmpresa> vinculaciones;
+        
+        return empleado;
     }
 }

@@ -9,8 +9,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import org.json.JSONObject;
 import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  *
@@ -48,10 +51,21 @@ public class FachadaPersistencia {
             if(rs.next()){
             
                 JSONObject obj;
-                JSONObject list;
+                JSONArray list;
                 
                 json.put("nombre" , rs.getString("NOMBRE"));
-                json.
+                json.put("fechaIni", rs.getDate("FECHAINICIOEMPRESA"));
+                json.put("password", rs.getString("PASSWORD"));
+                
+                list = getRoles(dni);
+                json.put("roles", list);
+                
+                list = getDisponibilidades(dni);
+                json.put("disponibilidades", list);
+                
+                list = getVinculaciones(dni);
+                json.put("vinculaciones", list);
+                
             }
             
         }catch(Exception e){
@@ -61,6 +75,85 @@ public class FachadaPersistencia {
         return json;
     }
     
+    private JSONArray getRoles(String dni) throws SQLException, JSONException{
+        String[] tipoRol = new String[20];
+        JSONArray list;
+        JSONObject obj;
+        
+        PreparedStatement stmt = conn.prepareStatement("select * from TIPOROL");
+        ResultSet rs = stmt.executeQuery();
+        
+        while (rs.next()){
+            tipoRol[rs.getInt("IDTIPO")]=rs.getString("NOMBRETIPO");
+        }
+        
+        list = new JSONArray(new ArrayList());
+        stmt = conn.prepareStatement("select * from ROLESENLAEMPRESA where EMPLEADO = ?");
+        stmt.setString(1, dni);
+        rs = stmt.executeQuery();
+        
+        while(rs.next()){
+        
+            obj = new JSONObject();
+            obj.put("tipoRol", tipoRol[rs.getInt("ROL")]);
+            obj.put("comienzoEnRol", rs.getDate("COMIENZOENROL"));
+            list.put(obj);
+        }
+        
+        return list;
+    }
+    
+    private JSONArray getDisponibilidades(String dni) throws SQLException, JSONException {
+        String[] tipoDisp = new String[20];
+        JSONArray list;
+        JSONObject obj;
+        
+        PreparedStatement stmt = conn.prepareStatement("select * from TIPODEDISPONIBILIDAD");
+        ResultSet rs = stmt.executeQuery();
+        
+        while(rs.next()){
+            tipoDisp[rs.getInt("IDTIPO")] = rs.getString("NOMBRETIPO");
+        }
+        
+        list = new JSONArray(new ArrayList());
+        stmt = conn.prepareStatement("select * from DISPONIBILIDADEMPLEADO where EMPLEADO = ?");
+        stmt.setString(1, dni);
+        rs = stmt.executeQuery();
+        
+        while(rs.next()){
+            obj = new JSONObject();
+            obj.put("disponibilidad", tipoDisp[rs.getInt("DISPONIBILIDAD")]);
+            obj.put("comienzo", rs.getDate("COMIENZO"));
+            obj.put("finalPrevisto", rs.getDate("FINALPREVISTO"));
+            list.put(obj);
+        }
+        return list;
+    }
+
+    private JSONArray getVinculaciones(String dni) throws SQLException, JSONException {
+        String[] tipoVinc = new String[20];
+        JSONArray list;
+        JSONObject obj;
+        
+        PreparedStatement stmt = conn.prepareStatement("select * from TIPOVINCULACION");
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            tipoVinc[rs.getInt("IDTIPO")]=rs.getString("NOMBRETIPO");
+        }
+        
+        list = new JSONArray(new ArrayList());
+        stmt = conn.prepareStatement("select * from VINCULACIONCONLAEMPRESA where EMPLEADO = ?");
+        stmt.setString(1, dni);
+        rs = stmt.executeQuery();
+        
+        while(rs.next()){
+            obj = new JSONObject();
+            obj.put("vinculo", tipoVinc[rs.getInt("VINCULO")]);
+            obj.put("inicio", rs.getDate("INICIO"));
+            list.put(obj);
+        }
+        return list;
+    }
     private static class FachadaPersistenciaHolder {
 
         private static final FachadaPersistencia INSTANCE = new FachadaPersistencia();
