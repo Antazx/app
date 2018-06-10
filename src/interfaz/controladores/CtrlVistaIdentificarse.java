@@ -28,7 +28,7 @@ public class CtrlVistaIdentificarse {
         
         String dni = vista.getDni();
         String pass = vista.getPassword();
-        String respuesta = "";
+        String respuesta = "";                  
         
         if(compruebaDatos(dni)){
             respuesta = controladorCU.identificarEmpleado(dni,pass);

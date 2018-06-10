@@ -22,7 +22,15 @@ public class CtrlCUIdentificarse {
         
        GestorEmpleado gestor = GestorEmpleado.getInstance();
        empleado = gestor.getEmpleado(dni);
+       
        System.out.println(empleado.toString());
+       
+       String pasw = empleado.getPassword();
+       String vinculacion = empleado.getVinculacionActual();
+       String disponibilidad = empleado.getDisponibilidadActual();
+       String rol = empleado.getRolActual();
+       
+       
        if (empleado != null){
            if(empleado.getPassword().equals(pass)){
                 if(empleado.getVinculacionActual().equals("Contratado")
