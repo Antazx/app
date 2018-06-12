@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -156,6 +157,69 @@ public class FachadaPersistencia {
         }
         return list;
     }
+
+   /* public JSONArray readProovedores() throws SQLException, JSONException {
+        
+        JSONArray list;
+        JSONObject obj;
+        
+        PreparedStatement stmt = conn.prepareStatement("select * from PROVEEDOR");
+        ResultSet rs = stmt.executeQuery();
+        
+        while (rs.next()) {
+            
+            obj = new JSONObject();
+            obj.put("cif", rs.getString("CIF"));
+            obj.put("nombre", rs.getString("NOMBRE"));
+            obj.put("telefono", rs.getString("TELEFONO"));
+            obj.put("email", rs.getString("EMAIL"));
+            
+            list = readPedidosProveedor(rs.getString("CIF"));
+            obj.put("pedidos", list);
+      
+        }
+    }*/
+    
+   /* public JSONArray readPedidosProveedor(String cif) throws SQLException, JSONException{
+    
+        JSONArray list = null;
+        JSONObject obj;
+        
+        PreparedStatement stmt = conn.prepareStatement("select * from PEDIDOAPROVEEDOR where ESTAPENDIENTE = 1 and PROVEEDOR = ?");
+        ResultSet rs = stmt.executeQuery();
+        
+        while(rs.next()){
+            
+            obj = new JSONObject();
+            obj.put("pedido", rs.getInt("NUMEROPEDIDO"));
+            obj.put("fecha", rs.getDate("FECHAREALIZACION"));
+            obj.put("estado", rs.getString("ESTAPENDIENTE"));
+            
+            
+        }
+ 
+        return list;
+    }*/
+    
+    public JSONArray readProveedoresPP() throws SQLException, JSONException{
+    
+        JSONArray list = new JSONArray();
+        JSONObject obj;
+        
+        PreparedStatement stmt = conn.prepareStatement("select distinct proveedor from PEDIDOAPROVEEDORES where ESTAPENDIENTE = 1");
+        ResultSet rs = stmt.executeQuery();
+        
+        while(rs.next()){
+            
+            obj = new JSONObject();
+            obj.put("proveedor", rs.getString(1));
+            list.put(obj);
+            
+        }
+        return list;
+    }
+    
+   
     private static class FachadaPersistenciaHolder {
 
         private static final FachadaPersistencia INSTANCE = new FachadaPersistencia();

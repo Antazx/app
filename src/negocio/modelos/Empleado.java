@@ -87,7 +87,8 @@ public class Empleado {
     }
     
     public String getVinculacionActual(){
-       /*String tipoVin = "";
+        
+       String tipoVin = "";
        LocalDate fechaProxima;
        
        VinculacionConLaEmpresa vin;
@@ -102,9 +103,9 @@ public class Empleado {
                tipoVin = vin.getVinculacion();
                fechaProxima = vin.getFechaInicio();
            }
-       }*/
-       
-       return "Contratado";
+       }
+        System.out.println("VINCULACION ACTUAL ----->" +tipoVin);
+       return tipoVin;
     }
     public String getDisponibilidadActual(){
         /*String tipoDisp = "";

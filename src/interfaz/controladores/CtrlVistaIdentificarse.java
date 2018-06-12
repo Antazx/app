@@ -8,7 +8,7 @@ package interfaz.controladores;
 import interfaz.gestor.GestorInterfaces;
 import interfaz.vistas.VistaIdentificarse;
 import negocio.controladoresCU.CtrlCUIdentificarse;
-import negocio.gestores.GestorEmpleado;
+
 
 /**
  *
@@ -28,19 +28,19 @@ public class CtrlVistaIdentificarse {
         
         String dni = vista.getDni();
         String pass = vista.getPassword();
-        String respuesta = "";                  
+        String respuesta = "";               
         
         if(compruebaDatos(dni)){
             respuesta = controladorCU.identificarEmpleado(dni,pass);
             switch(respuesta){
-                case "NoExiste":
-                    vista.mostrarError("No existe el usuario");
+                case "No existe el usuario":
+                    vista.mostrarError(respuesta);
                     break;
-                case "PassIncorrecta":
-                    vista.mostrarError("La contraseña no es correcta");
+                case "La contraseña no es correcta":
+                    vista.mostrarError(respuesta);
                     break;
-                case "NoActivo":
-                    vista.mostrarError("Usuario Inactivo");
+                case "Usuario Inactivo":
+                    vista.mostrarError(respuesta);
                     break;
                 default:
                     System.out.println("Rol encontrado: " +respuesta);

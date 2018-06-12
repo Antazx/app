@@ -5,7 +5,7 @@
  */
 package interfaz.gestor;
 
-import interfaz.vistas.VistaIdentificarse;
+import interfaz.vistas.*;
 import javax.swing.JFrame;
 
 /**
@@ -26,7 +26,7 @@ public class GestorInterfaces {
     public GestorInterfaces(){}
     
     public static void main(String[] args){
-        GestorInterfaces.getInstancia().muestraInterfazIdentificarse();
+        GestorInterfaces.getInstancia().muestraInterfazConsultarFacturas();
     }
 
     public void empleadoIdentificado(String rol){
@@ -56,9 +56,13 @@ public class GestorInterfaces {
         vistaActual.setVisible(true);
     }
     
-    
     private void muestraInterfazIdentificarse() {
         vistaActual = new VistaIdentificarse();
+        vistaActual.setVisible(true);
+    }
+    
+    private void muestraInterfazConsultarFacturas() {
+        vistaActual = new VistaConsultarFacturas();
         vistaActual.setVisible(true);
     }
     

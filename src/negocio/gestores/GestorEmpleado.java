@@ -37,7 +37,6 @@ public class GestorEmpleado {
     public Empleado getEmpleado(String dni){
            
         JSONObject consulta = fachada.readEmpleado(dni);
-        System.out.println(consulta.toString());
         Empleado empleado = new Empleado(consulta);
         
         return empleado;

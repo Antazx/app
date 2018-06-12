@@ -16,37 +16,34 @@ import negocio.modelos.Empleado;
 public class CtrlCUIdentificarse {
     
     private Empleado empleado;
-
+    private GestorEmpleado gestor = GestorEmpleado.getInstance();
 
     public String identificarEmpleado(String dni, String pass) {
         
-       GestorEmpleado gestor = GestorEmpleado.getInstance();
        empleado = gestor.getEmpleado(dni);
-       
-       System.out.println(empleado.toString());
        
        String pasw = empleado.getPassword();
        String vinculacion = empleado.getVinculacionActual();
        String disponibilidad = empleado.getDisponibilidadActual();
        String rol = empleado.getRolActual();
-       
+       String respuesta ="";
        
        if (empleado != null){
-           if(empleado.getPassword().equals(pass)){
-                if(empleado.getVinculacionActual().equals("Contratado")
-                        && empleado.getDisponibilidadActual().equals("Trabajando")){
-                        return empleado.getRolActual();
+           if(pasw.equals(pass)){
+                if(vinculacion.equals("Contratado")
+                        && disponibilidad.equals("Trabajando")){
+                        return (respuesta = empleado.getRolActual());
                 }else{
-                    System.out.println("NoActivo" +empleado.getVinculacionActual() +" " +empleado.getDisponibilidadActual());
-                    return "NoActivo";
+                    System.out.println("NoActivo" +vinculacion +" " +disponibilidad);
+                    return (respuesta = "Usuario Inactivo");
                 }
            }else{
-               System.out.println("Contraseña Incorrecta");
-               return "PassIncorrecta";
+              
+               return (respuesta = "La contraseña no es correcta");
            }
        }else{
            System.out.println("NoExiste");
-           return "NoExiste";
+           return (respuesta = "No existe el usuario");
        }
     }
 }
