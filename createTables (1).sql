@@ -64,7 +64,7 @@ create table TIPODEDISPONIBILIDAD
 INSERT INTO TIPODEDISPONIBILIDAD
 VALUES  (1,'Vacaciones'),
         (2,'BajaTemporal'),
-	(3, 'Trabajando');
+		(3,'Trabajando');
 
 -- Entity
 create table EMPLEADO
@@ -76,6 +76,14 @@ create table EMPLEADO
 		PRIMARY KEY(Nif)
 );
 
+INSERT INTO EMPLEADO
+VALUES  ('11111111A','Pablo','123','2017-03-17'),
+        ('22222222B','Maria','456','2017-05-13'),
+		('33333333C','Sergio','789','2017-07-11'),
+		('44444444D','Iris','111','2017-09-15'),
+		('55555555E','Paco','112','2017-11-19'),
+		('66666666F','Eva','113','2017-01-21');
+
 -- Association
 create table ROLESENEMPRESA
 (
@@ -86,6 +94,12 @@ create table ROLESENEMPRESA
             FOREIGN KEY(Rol) REFERENCES TIPODEROL(IdTipo)
 );
 
+INSERT INTO ROLESENEMPRESA
+VALUES  ('2017-03-18','11111111A',1),
+		('2017-05-14','22222222B',2),
+		('2017-07-12','33333333C',3),
+		('2017-09-16','44444444D',4);
+
 -- Association
 create table VINCULACIONCONLAEMPRESA
 (
@@ -93,8 +107,16 @@ create table VINCULACIONCONLAEMPRESA
 	Empleado VARCHAR(9) not null,
 	Vinculo SMALLINT not null,
 		FOREIGN KEY(Empleado) REFERENCES EMPLEADO(Nif),
-		FOREIGN KEY(Vinculo) REFERENCES TIPODEVINCULACION(IdTipo)
+		FOREIGN KEY(Vinculo) REFERENCES TIPODEVINCULACION(IdTipo) 
 );
+
+INSERT INTO VINCULACIONCONLAEMPRESA
+VALUES  ('2017-03-17','11111111A',1),
+		('2017-05-13','22222222B',1),
+		('2017-07-11','33333333C',1),
+		('2017-09-15','44444444D',1),
+		('2017-11-20','55555555E',2),
+		('2017-01-22','66666666F',3);
 
 -- Association
 create table DISPONIBILIDADEMPLEADO
@@ -106,6 +128,12 @@ create table DISPONIBILIDADEMPLEADO
 		FOREIGN KEY(Empleado) REFERENCES EMPLEADO(Nif),
 		FOREIGN KEY(Disponibilidad) REFERENCES TIPODEDISPONIBILIDAD(IdTipo)
 );
+
+INSERT INTO DISPONIBILIDADEMPLEADO
+VALUES  ('2017-03-17',null,'11111111A',3),
+		('2017-05-13',null,'22222222B',3),
+		('2017-07-11','2017-07-21','33333333C',2),
+		('2017-09-15','2017-09-30','44444444D',1);
 
 -- Entity
 create table PRODUCTO
@@ -125,6 +153,16 @@ create table PRODUCTO
 		FOREIGN KEY(PlantaDeLaFlor) REFERENCES PRODUCTO(Codigo)
 );
 
+INSERT INTO PRODUCTO
+VALUES  ('A','Orquideas','Para los aficionados de plantas esta especie de plantas con flores sera de las mas faciles para tener en casa',20,5,15.0,13.0,4,null,'Planta',null),
+		('B','Azalea','De las plantas con flores menos exigentes, azalea se sentira bien en tu casa si la pulverizas 1 vez al dia y la alejas de la calefacción',15,7,13.0,10.0,2,null,'Flor','A'),
+		('C','Camelia','Es de las plantas con flores que se ven mas bonitas de todas. Sus flores son de color rosa vivo y ademas es resistente al frio',34,2,33.0,23.0,4,'Hogar','Auxiliar',null),
+		('D','Crisantemo','Mientras en tu casa haya mucha luz, el crisantemo abrira sus flores. De las plantas con flores perfectas para interior',20,2,15.0,13.0,6,null,'Planta',null),
+		('E','Rosa desierto','Aunque la rosa desierto es un arbusto que requiere mucho cuidado, es de las plantas con flores mas originales porque puede florecer hasta varias veces en un verano',12,2,17.0,16.0,4,null,'Flor','D'),
+		('G','Flor de pascua','Esta flor, tambien conocida como Nochebuena, es un adorno de Navidad perfecto. De las plantas con flores mas conocidas',21,5,15.0,11.0,2,null,'Planta',null),
+		('F','Brezo','Brezo es muy bonito y el mejor ambiente para el es un area sin calefaccion. Es de las plantas con flores que requieren regarse con agua sin cal y con pH reducido',25,8,10.0,9.0,8,null,'Flor','G'),
+		('H','Gardenia','Hay una especie de gardenia que florece parecido a jazmin y llena su entorno con un aroma fabuloso. De las plantas con flores que tienes que alejar de las corrientes de aire',43,7,15.0,13.0,4,'Decoracion','Auxiliar',null);
+
 -- Entity
 create table PROVEEDOR
 (
@@ -134,6 +172,13 @@ create table PROVEEDOR
 	Email VARCHAR(50) not null,
 		PRIMARY KEY(Cif)
 );
+
+INSERT INTO PROVEEDOR
+VALUES  ('01A','Floristeria Amadeo','589654125','amadeo@gmail.com'),
+		('02B','Repartidor Julio','645824578','julio@gmail.com'),
+		('03C','Rosario Flores','542854815','flores@gmail.com'),
+		('04D','Almacen Tulipan','849764542','almacen@gmail.com'),
+		('05E','Sergio Ramos','142758645','ramos@gmail.com');
 
 -- Entity
 create table PEDIDOAPROVEEDOR
@@ -146,6 +191,15 @@ create table PEDIDOAPROVEEDOR
 		FOREIGN KEY(Proveedor) REFERENCES PROVEEDOR(Cif)
 );
 
+INSERT INTO PEDIDOAPROVEEDOR
+VALUES  (1,'2018-02-12','1','01A'),
+		(2,'2018-04-13','0','01A'),
+		(3,'2018-01-26','1','01A'),
+		(4,'2018-01-17','1','03C'),
+		(5,'2018-02-13','1','01A'),
+		(6,'2018-03-05','0','05E'),
+		(7,'2018-05-05','1','05E');
+
 -- Entity
 create table LINEADEPEDIDO
 (
@@ -156,7 +210,15 @@ create table LINEADEPEDIDO
 		FOREIGN KEY(Producto) REFERENCES PRODUCTO(Codigo)
 );
 
--- Entity
+INSERT INTO LINEADEPEDIDO
+VALUES  (4,2,'A'),
+		(2,3,'A'),
+		(8,2,'B'),
+		(3,2,'H'),
+		(9,2,'C'),
+		(4,3,'A');
+
+-- Entity 
 create table TRANSFERENCIA
 (
 	Id INTEGER not null,
@@ -167,6 +229,10 @@ create table TRANSFERENCIA
 		PRIMARY KEY(Id),
 		FOREIGN KEY(Administrativo) REFERENCES EMPLEADO(Nif)
 );
+
+INSERT INTO TRANSFERENCIA
+VALUES  (1,10.0,'2018-05-05','1','22222222B'),
+		(2,25.0,'2018-06-05','0','22222222B');
 
 -- Entity
 create table FACTURA
@@ -181,6 +247,9 @@ create table FACTURA
 		FOREIGN KEY(EnTransferencia) REFERENCES TRANSFERENCIA(Id)
 );
 
+INSERT INTO FACTURA
+VALUES  (1,'2018-05-05',10.0,'55214578547836521',1,1);
+
 -- Entity
 create table VENTA
 (
@@ -192,6 +261,11 @@ create table VENTA
 
 );
 
+INSERT INTO VENTA
+VALUES  (1,'2018-04-15','44444444D'),
+		(2,'2018-05-16','44444444D'),
+		(3,'2018-06-24','44444444D');
+
 -- Entity
 create table LINEADEVENTA
 (
@@ -201,6 +275,11 @@ create table LINEADEVENTA
 		FOREIGN KEY(Venta) REFERENCES VENTA(IdDeVenta),
 		FOREIGN KEY(Producto) REFERENCES PRODUCTO(Codigo)
 );
+
+INSERT INTO LINEADEVENTA
+VALUES  (10,1,'A'),
+		(5,2,'C'),
+		(6,3,'E');
 
 -- Enum
 create table TIPODEESTADODELOTE
@@ -244,6 +323,13 @@ create table LOTE
 		FOREIGN KEY(Planta) REFERENCES PRODUCTO(Codigo)
 );
 
+INSERT INTO LOTE
+VALUES  (1,5,'2018-01-01',1,'A'),
+		(2,7,'2018-02-23',2,'A'),
+		(3,12,'2018-03-12',3,'D'),
+		(4,9,'2018-04-25',4,'D'),
+		(5,2,'2018-06-17',5,'G');
+
 -- Association
 create table FLORESENLOTE
 (
@@ -252,8 +338,13 @@ create table FLORESENLOTE
 	Lote INTEGER not null,
 		FOREIGN KEY(Flor) REFERENCES PRODUCTO(Codigo),
 		FOREIGN KEY(Lote) REFERENCES LOTE(Id)
-
+	
 );
+
+INSERT INTO FLORESENLOTE
+VALUES  (7,'B',1),
+		(12,'E',2),
+		(8,'F',3);
 
 -- Entity
 create table OPERACIONDEMANTENIMIENTO
@@ -265,3 +356,9 @@ create table OPERACIONDEMANTENIMIENTO
 		FOREIGN KEY(Tipo) REFERENCES TIPODEOPERACIONDEMANTENIMIENTO(IdTipo),
 		FOREIGN KEY(Operario) REFERENCES EMPLEADO(Nif)
 );
+
+INSERT INTO OPERACIONDEMANTENIMIENTO
+VALUES  ('2018-01-01',1,'33333333C'),
+		('2018-02-12',2,'33333333C'),
+		('2018-03-21',3,'33333333C'),
+		('2018-04-27',4,'33333333C');

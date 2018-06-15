@@ -36,8 +36,8 @@ public class GestorInterfaces {
                 //reemplazarVista(new VistaPrincipalSupervisor());
                 break;
             case "Administrativo":
-                System.out.println("ADMINISTRATIVO NO IMPLEMENTADO");
-                //reemplazarVista(new VistaPrincipalAdministrativo());
+                
+                reemplazarVista(new VistaConsultarFacturas());
                 break;
             case "Operario":
                 System.out.println("OPERARIO NO IMPLEMENTADO");

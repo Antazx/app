@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -22,14 +21,12 @@ import org.json.JSONException;
  */
 public class FachadaPersistencia {
     private static String dbURL = "jdbc:derby://localhost:1527/BDDis";
-    // jdbc Connection
     private static Connection conn = null;
     
     public FachadaPersistencia() {
         try
         {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-            //Get a connection
             conn = DriverManager.getConnection(dbURL); 
         }
         catch (Exception e)

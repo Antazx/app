@@ -21,7 +21,7 @@ public class Disponibilidad {
     private LocalDate comienzo;
     private LocalDate finPrevisto;
     
-    Disponibilidad(JSONObject jsonObject) {
+    public Disponibilidad(JSONObject jsonObject) {
         try{
             this.disponibilidad = jsonObject.getString("disponibilidad");
             this.comienzo = ((java.sql.Date)jsonObject.get("comienzo")).toLocalDate();
