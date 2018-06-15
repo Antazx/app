@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package negocio.gestores;
+package persistencia.gestores;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,60 +21,60 @@ import org.json.JSONObject;
  *
  * @author GUillermo
  */
-public class GestorDisponibilidad {
+public class GestorRol {
     
-    private static GestorDisponibilidad gestor;
+    private static GestorRol gestor;
     private static String dbURL = "jdbc:derby://localhost:1527/BDDis";
     private static Connection conn = null;
     
-    public GestorDisponibilidad(){
-        try{
+    public GestorRol(){
+        try {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-            conn = DriverManager.getConnection(dbURL);
-            
+            conn = DriverManager.getConnection(dbURL); 
         }catch (Exception e){
-            
             e.printStackTrace();
         }
     }
-    public static GestorDisponibilidad getInstance() {
-        if(gestor == null){gestor = new GestorDisponibilidad();}
-            
+    
+    public static GestorRol getInstance() {
+        if(gestor == null)
+            gestor = new GestorRol();
         return gestor;
     }
 
-    public JSONArray readDisponibilidades(String dni){
-        String[] tipoDisp = new String[20];
+    public JSONArray readRol(String dni) {
+        
+        String[] tipoRol = new String[20];
         JSONArray list = null;
         JSONObject obj;
         
         PreparedStatement stmt;
         try {
-            stmt = conn.prepareStatement("select * from TIPODEDISPONIBILIDAD");
+            stmt = conn.prepareStatement("select * from TIPODEROL");
             ResultSet rs = stmt.executeQuery();
-        
-            while(rs.next()){
-                tipoDisp[rs.getInt("IDTIPO")] = rs.getString("NOMBRETIPO");
+            
+            while (rs.next()){
+            tipoRol[rs.getInt("IDTIPO")]=rs.getString("NOMBRETIPO");
             }
 
             list = new JSONArray(new ArrayList());
-            stmt = conn.prepareStatement("select * from DISPONIBILIDADEMPLEADO where EMPLEADO = ?");
+            stmt = conn.prepareStatement("select * from ROLESENEMPRESA where EMPLEADO = ?");
             stmt.setString(1, dni);
             rs = stmt.executeQuery();
 
             while(rs.next()){
+
                 obj = new JSONObject();
-                obj.put("disponibilidad", tipoDisp[rs.getInt("DISPONIBILIDAD")]);
-                obj.put("comienzo", rs.getDate("COMIENZO"));
-                obj.put("finalPrevisto", rs.getDate("FINALPREVISTO"));
+                obj.put("tipoRol", tipoRol[rs.getInt("ROL")]);
+                obj.put("comienzoEnRol", rs.getDate("COMIENZOENROL"));
                 list.put(obj);
             }
+            
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDisponibilidad.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestorRol.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JSONException ex) {
-            Logger.getLogger(GestorDisponibilidad.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestorRol.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("GESTOR DISPONIBILIDAD: " +list.toString());
         return list;
     }
     

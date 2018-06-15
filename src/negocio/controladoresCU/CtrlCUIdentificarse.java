@@ -10,9 +10,8 @@ import negocio.modelos.Empleado;
 import negocio.modelos.Rol;
 import negocio.modelos.VinculacionConLaEmpresa;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import persistencia.FachadaCUIdentificarse;
+import persistencia.Fachadas.FachadaCUIdentificarse;
 
 
 /**

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package negocio.gestores;
+package persistencia.gestores;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,18 +15,18 @@ import persistencia.FachadaPersistencia;
  *
  * @author GUillermo
  */
-public class GestorProovedor {
+public class GestorProveedor {
     
-    private static GestorProovedor gestorProovedor;
+    private static GestorProveedor gestorProovedor;
     private final FachadaPersistencia fachada;
     
-    public GestorProovedor(){
+    public GestorProveedor(){
         fachada = FachadaPersistencia.getInstance();
     }
     
-    public static GestorProovedor getInstance(){
+    public static GestorProveedor getInstance(){
         if(gestorProovedor == null){
-            return new GestorProovedor();
+            return new GestorProveedor();
         } else {
             return gestorProovedor;
         }
