@@ -89,17 +89,22 @@ public class Empleado {
        return tipoVin;
     }
     public String getDisponibilidadActual(){
-        /*String tipoDisp = "";
+        String tipoDisp = "";
         LocalDate fechaProxima;
         Disponibilidad disp;
         ArrayList<Disponibilidad> dispComp = this.getDisponibilidades();
         
         disp = dispComp.get(0);
-        fechaProxima = disp.get
-        for (int i = 0; i < disponibilidades.size(); i++){
-            disp = 
-        }*/
-        return "Trabajando";
+        fechaProxima = disp.getComienzo();
+        tipoDisp = disp.getDisponibilidad();
+        for (int i = 0; i < dispComp.size(); i++){
+            disp = dispComp.get(i);
+            if(disp.getComienzo().isAfter(fechaProxima)){
+               tipoDisp= disp.getDisponibilidad();
+               fechaProxima = disp.getComienzo();
+           }
+        }
+        return tipoDisp;
     }
    
     public String getPassword() {
