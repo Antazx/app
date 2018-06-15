@@ -20,7 +20,6 @@ public class GestorEmpleado {
     
     private static GestorEmpleado gestorEmpleado;
     private static final String URL = "jdbc:derby://localhost:1527/BDDis";
-    // jdbc Connection
     private static Connection conn = null;
     
     public GestorEmpleado(){

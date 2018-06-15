@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import persistencia.gestores.GestorProveedor;
 import negocio.modelos.Proveedor;
+import org.json.JSONArray;
 import persistencia.Fachadas.FachadaCUConsultarFacturas;
 
 /**
@@ -23,7 +24,11 @@ public class CtrlCUConsultarFacturas {
 
     public void getProovedores(LocalDate fechaInicio, LocalDate fechaFin) {
         
-        //proovedores = gestor.getProovedores(fechaInicio, fechaFin);
+        JSONArray facturasJ = fachada.getFacturas(fechaInicio, fechaFin);
+        System.out.println(facturasJ.toString());
+        Factura factura = new Factura(facturasJ);
+        //JSONArray pedidosJ = fachada.getPedidos();
+        //JSONArray proveedoresJ = fachada.getProveedores();
     }
     
 }

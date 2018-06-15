@@ -5,6 +5,8 @@
  */
 package persistencia.Fachadas;
 
+import java.time.LocalDate;
+import org.json.JSONArray;
 import persistencia.gestores.GestorFactura;
 import persistencia.gestores.GestorPedido;
 import persistencia.gestores.GestorProveedor;
@@ -16,17 +18,27 @@ import persistencia.gestores.GestorProveedor;
 public class FachadaCUConsultarFacturas {
     
     private static FachadaCUConsultarFacturas fachada;
-    private GestorFactura gestorFacturas;
-    private GestorPedido gestorPedidos;
-    private GestorProveedor gestorProveedor;
+    private final GestorFactura gestorFacturas;
+    private final GestorPedido gestorPedidos;
+    private final GestorProveedor gestorProveedor;
             
     
     public FachadaCUConsultarFacturas() {
         
+        gestorFacturas = GestorFactura.getInstance();
+        gestorPedidos = GestorPedido.getInstance();
+        gestorProveedor = GestorProveedor.getInstance();
+        
     }
     public static FachadaCUConsultarFacturas getInstance() {
-        if(fachada == null) new FachadaCUConsultarFacturas();
+        if(fachada == null){
+            fachada = new FachadaCUConsultarFacturas();
+        } 
         return fachada;
+    }
+
+    public JSONArray getFacturas(LocalDate fechaInicio, LocalDate fechaFin) {
+        return gestorFacturas.readFacturas(fechaInicio, fechaFin);
     }
     
 }
