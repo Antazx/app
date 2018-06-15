@@ -60,7 +60,7 @@ public class Empleado {
             }
         }*/
         
-        return "Supervisor";
+        return "Administrativo";
     }
     
     public String getVinculacionActual(){
