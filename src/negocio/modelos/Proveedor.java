@@ -5,6 +5,9 @@
  */
 package negocio.modelos;
     
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.JSONException;
 import org.json.JSONObject;
 
     
@@ -15,12 +18,27 @@ import org.json.JSONObject;
 public class Proveedor {
     
     private String cif;
-    private String proovedor;
+    private String nombre;
     private String telefono;
     private String email;
     
     public Proveedor(JSONObject js){
-    
+        if(js != null){
+            
+            try {
+                this.cif = js.getString("cif");
+                this.email = js.getString("email");
+                this.telefono = js.getString("telefono");
+                this.nombre = js.getString("nombre");
+            } catch (JSONException ex) {
+                Logger.getLogger(Proveedor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+    }
+
+    public String getNombre() {
+        return nombre;
     }
     
 }

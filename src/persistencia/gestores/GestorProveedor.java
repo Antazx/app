@@ -5,10 +5,15 @@
  */
 package persistencia.gestores;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import negocio.modelos.Proveedor;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import persistencia.FachadaPersistencia;
 
 /**
@@ -18,10 +23,16 @@ import persistencia.FachadaPersistencia;
 public class GestorProveedor {
     
     private static GestorProveedor gestorProovedor;
-    private final FachadaPersistencia fachada;
+    private static final String URL = "jdbc:derby://localhost:1527/BDDis";
+    private static Connection conn = null;
     
     public GestorProveedor(){
-        fachada = FachadaPersistencia.getInstance();
+        try{
+            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            conn = DriverManager.getConnection(URL); 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     
     public static GestorProveedor getInstance(){
@@ -50,4 +61,28 @@ public class GestorProveedor {
         
         return provs;
     }*/
+
+    public JSONObject readProveedor(String proveedorS) {
+        JSONObject json = null;
+        try{
+        
+            PreparedStatement stmt = conn.prepareStatement("select * from PROVEEDOR where (CIF = ?)");
+            stmt.setString(1, proveedorS);
+            ResultSet rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                
+                json = new JSONObject();
+                json.put("cif" , rs.getString("CIF"));
+                json.put("nombre", rs.getString("NOMBRE"));
+                json.put("telefono", rs.getString("TELEFONO"));
+                json.put("email", rs.getString("EMAIL"));
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return json;
+    }
 }

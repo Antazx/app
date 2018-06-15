@@ -7,6 +7,7 @@ package persistencia.Fachadas;
 
 import java.time.LocalDate;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import persistencia.gestores.GestorFactura;
 import persistencia.gestores.GestorPedido;
 import persistencia.gestores.GestorProveedor;
@@ -39,6 +40,14 @@ public class FachadaCUConsultarFacturas {
 
     public JSONArray getFacturas(LocalDate fechaInicio, LocalDate fechaFin) {
         return gestorFacturas.readFacturas(fechaInicio, fechaFin);
+    }
+    
+    public JSONObject getPedido(int idPedido) {
+        return gestorPedidos.readPedido(idPedido);
+    }
+
+    public JSONObject getProveedor(String proveedorS) {
+        return gestorProveedor.readProveedor(proveedorS);
     }
     
 }
