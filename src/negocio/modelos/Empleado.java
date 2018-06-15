@@ -134,6 +134,18 @@ public class Empleado {
     public ArrayList<Rol> getRoles(){
         return roles;
     }
+
+    public void addRol(Rol rolJ) {
+        roles.add(rolJ);
+    }
+
+    public void addDisponibilidad(Disponibilidad disponibilidadJ) {
+        disponibilidades.add(disponibilidadJ);
+    }
+
+    public void addVinculacion(VinculacionConLaEmpresa vinculacionJ) {
+        vinculacionesConLaEmpresa.add(vinculacionJ);
+    }
     
     
 }
