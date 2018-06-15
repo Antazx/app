@@ -26,7 +26,7 @@ public class GestorInterfaces {
     public GestorInterfaces(){}
     
     public static void main(String[] args){
-        GestorInterfaces.getInstancia().muestraInterfazConsultarFacturas();
+        GestorInterfaces.getInstancia().muestraInterfazIdentificarse();
     }
 
     public void empleadoIdentificado(String rol){
