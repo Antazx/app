@@ -157,7 +157,8 @@ public class VistaIdentificarse extends javax.swing.JFrame {
 
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
         // TODO add your handling code here:
-         controlador.procesaEventoIntroduceDatos();
+        error.setVisible(false);
+        controlador.procesaEventoIntroduceDatos();
     }//GEN-LAST:event_jButton2MousePressed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed

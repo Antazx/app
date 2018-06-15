@@ -7,8 +7,9 @@ package negocio.controladoresCU;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import negocio.gestores.GestorProovedor;
+import persistencia.gestores.GestorProveedor;
 import negocio.modelos.Proveedor;
+import persistencia.Fachadas.FachadaCUConsultarFacturas;
 
 /**
  *
@@ -16,7 +17,7 @@ import negocio.modelos.Proveedor;
  */
 public class CtrlCUConsultarFacturas {
     
-    GestorProovedor gestor = GestorProovedor.getInstance();
+    FachadaCUConsultarFacturas fachada = FachadaCUConsultarFacturas.getInstance();
     ArrayList<Proveedor> proovedores;
     
 

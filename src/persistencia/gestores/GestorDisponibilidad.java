@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package negocio.gestores;
+package persistencia.gestores;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,13 +21,13 @@ import org.json.JSONObject;
  *
  * @author GUillermo
  */
-public class GestorVinculacion {
+public class GestorDisponibilidad {
     
-    private static GestorVinculacion gestor;
+    private static GestorDisponibilidad gestor;
     private static String dbURL = "jdbc:derby://localhost:1527/BDDis";
     private static Connection conn = null;
     
-    public GestorVinculacion(){
+    public GestorDisponibilidad(){
         try{
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
             conn = DriverManager.getConnection(dbURL);
@@ -37,42 +37,44 @@ public class GestorVinculacion {
             e.printStackTrace();
         }
     }
-    public static GestorVinculacion getInstance() {
-        if(gestor == null)
-            gestor = new GestorVinculacion();
+    public static GestorDisponibilidad getInstance() {
+        if(gestor == null){gestor = new GestorDisponibilidad();}
+            
         return gestor;
     }
 
-    public JSONArray readVinculaciones(String dni) {
-        String[] tipoVinc = new String[20];
+    public JSONArray readDisponibilidades(String dni){
+        String[] tipoDisp = new String[20];
         JSONArray list = null;
         JSONObject obj;
         
         PreparedStatement stmt;
         try {
-            stmt = conn.prepareStatement("select * from TIPODEVINCULACION");
+            stmt = conn.prepareStatement("select * from TIPODEDISPONIBILIDAD");
             ResultSet rs = stmt.executeQuery();
+        
             while(rs.next()){
-                tipoVinc[rs.getInt("IDTIPO")]=rs.getString("NOMBRETIPO");
+                tipoDisp[rs.getInt("IDTIPO")] = rs.getString("NOMBRETIPO");
             }
 
             list = new JSONArray(new ArrayList());
-            stmt = conn.prepareStatement("select * from VINCULACIONCONLAEMPRESA where EMPLEADO = ?");
+            stmt = conn.prepareStatement("select * from DISPONIBILIDADEMPLEADO where EMPLEADO = ?");
             stmt.setString(1, dni);
             rs = stmt.executeQuery();
 
             while(rs.next()){
                 obj = new JSONObject();
-                obj.put("vinculo", tipoVinc[rs.getInt("VINCULO")]);
-                obj.put("inicio", rs.getDate("INICIO"));
+                obj.put("disponibilidad", tipoDisp[rs.getInt("DISPONIBILIDAD")]);
+                obj.put("comienzo", rs.getDate("COMIENZO"));
+                obj.put("finalPrevisto", rs.getDate("FINALPREVISTO"));
                 list.put(obj);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GestorVinculacion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestorDisponibilidad.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JSONException ex) {
-            Logger.getLogger(GestorVinculacion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestorDisponibilidad.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        System.out.println("GESTOR DISPONIBILIDAD: " +list.toString());
         return list;
     }
     

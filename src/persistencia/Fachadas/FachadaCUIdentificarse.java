@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistencia;
+package persistencia.Fachadas;
 
-import negocio.gestores.GestorDisponibilidad;
-import negocio.gestores.GestorEmpleado;
-import negocio.gestores.GestorRol;
-import negocio.gestores.GestorVinculacion;
+import persistencia.gestores.GestorDisponibilidad;
+import persistencia.gestores.GestorEmpleado;
+import persistencia.gestores.GestorRol;
+import persistencia.gestores.GestorVinculacion;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -29,9 +29,7 @@ public class FachadaCUIdentificarse {
     public FachadaCUIdentificarse(){
         
         gestorEmpleado = GestorEmpleado.getInstance();
-        
         gestorRol = GestorRol.getInstance();
-        
         gestorVinculacion = GestorVinculacion.getInstance();
         gestorDisponibilidad = GestorDisponibilidad.getInstance();
     }
