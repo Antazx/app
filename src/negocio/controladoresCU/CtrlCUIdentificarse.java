@@ -73,7 +73,7 @@ public class CtrlCUIdentificarse {
             
             e.printStackTrace();
         }
- 
+        System.out.println("tamaño rol "+empleadoJ.getRoles().size());
         String paswS = empleadoJ.getPassword();
         String vinculacionS = empleadoJ.getVinculacionActual();
         String disponibilidadS = empleadoJ.getDisponibilidadActual();

@@ -44,28 +44,30 @@ public class Empleado {
         } 
     }
     public String getRolActual(){
-        /*String tipoRol = "";
+        String tipoRol = "";
         LocalDate fechaProxima;
         
         Rol rol;
         ArrayList<Rol> rolesComp = this.getRoles();
-        
+ 
         rol = rolesComp.get(0);
         fechaProxima = rol.getComienzoEnRol();
+        tipoRol = rol.getTipoRol();
+       
         for (int i = 0; i < rolesComp.size(); i++){
             rol = rolesComp.get(i);
             if(rol.getComienzoEnRol().isAfter(fechaProxima)){
-                tipoRol = rol.getTipoRol();
-                fechaProxima = rol.getComienzoEnRol();
+                    tipoRol = rol.getTipoRol();
+                    fechaProxima = rol.getComienzoEnRol();         
             }
-        }*/
+        }
         
-        return "Administrativo";
+        return tipoRol;
     }
     
     public String getVinculacionActual(){
         
-       /*String tipoVin = "";
+       String tipoVin = "";
        LocalDate fechaProxima;
        
        VinculacionConLaEmpresa vin;
@@ -73,7 +75,9 @@ public class Empleado {
        
        vin = vinComp.get(0);
        fechaProxima = vin.getFechaInicio();
+       tipoVin = vin.getVinculacion();
        
+
        for(int i = 0; i < vinComp.size(); i++){
            vin = vinComp.get(i);
            if(vin.getFechaInicio().isAfter(fechaProxima)){
@@ -81,8 +85,8 @@ public class Empleado {
                fechaProxima = vin.getFechaInicio();
            }
        }
-        System.out.println("VINCULACION ACTUAL ----->" +tipoVin);*/
-       return "Contratado";
+ 
+       return tipoVin;
     }
     public String getDisponibilidadActual(){
         /*String tipoDisp = "";
