@@ -24,13 +24,10 @@ public class GestorEmpleado {
     private static Connection conn = null;
     
     public GestorEmpleado(){
-        try
-        {
+        try{
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
             conn = DriverManager.getConnection(URL); 
-        }
-        catch (Exception e)
-        {
+        }catch (Exception e){
             e.printStackTrace();
         }
     }

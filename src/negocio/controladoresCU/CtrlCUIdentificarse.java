@@ -37,16 +37,18 @@ public class CtrlCUIdentificarse {
             if(empleado != null){
             
             empleadoJ = new Empleado(empleado);
-            
             JSONArray rol = fachada.getRoles(dni);
+                
             if(rol != null){
                 for (i = 0; i < rol.length(); i++) {
+                    
                     rolJ = new Rol(rol.getJSONObject(i));
                     empleadoJ.addRol(rolJ);
                 }
             }
          
             JSONArray disponibilidad = fachada.getDisponibilidad(dni);
+            
             if(disponibilidad != null){
                 for (i = 0; i < disponibilidad.length(); i++){
                     disponibilidadJ = new Disponibilidad(disponibilidad.getJSONObject(i));
@@ -55,6 +57,7 @@ public class CtrlCUIdentificarse {
             }
             
             JSONArray vinculacion = fachada.getVinculacion(dni);
+            
             if(vinculacion != null){
                 for (i = 0; i < vinculacion.length(); i++){
                     vinculacionJ = new VinculacionConLaEmpresa(vinculacion.getJSONObject(i));
@@ -62,8 +65,9 @@ public class CtrlCUIdentificarse {
                 }
             }
             
+              
             }else{
-                 System.out.println("NoExiste");
+            
                 return (respuesta = "No existe el usuario");
              }
         } catch (Exception e){
@@ -75,6 +79,8 @@ public class CtrlCUIdentificarse {
         String vinculacionS = empleadoJ.getVinculacionActual();
         String disponibilidadS = empleadoJ.getDisponibilidadActual();
         String rolS = empleadoJ.getRolActual();
+        
+        System.out.println(empleado.toString() +vinculacionS +disponibilidadS +rolS);
         
         if(paswS.equals(pass)){
                 if(vinculacionS.equals("Contratado")&& disponibilidadS.equals("Trabajando")){

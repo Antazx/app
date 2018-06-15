@@ -34,32 +34,9 @@ public class Empleado {
                 this.fechaIni = ((java.sql.Date) js.get("fechaIni")).toLocalDate();
                 this.nombre = js.getString("nombre");
                 this.password = js.getString("password");
-                
-                JSONArray rolesJSON = js.getJSONArray("roles");
-                JSONArray dispJSON = js.getJSONArray("disponibilidades");
-                JSONArray vincJSON = js.getJSONArray("vinculaciones");
-                
-                roles = new ArrayList<Rol>();
-                disponibilidades = new ArrayList<Disponibilidad>();
-                vinculacionesConLaEmpresa = new ArrayList<VinculacionConLaEmpresa>();
-                
-                for (int i = 0; i < rolesJSON.length(); i++){
-                    
-                    Rol rol = new Rol(rolesJSON.getJSONObject(i));
-                    roles.add(rol);   
-                }
-                
-                for (int i = 0; i < dispJSON.length(); i++){
-                
-                    Disponibilidad dis = new Disponibilidad(dispJSON.getJSONObject(i));
-                    disponibilidades.add(dis);
-                }
-                
-                for (int i = 0; i < vincJSON.length(); i++){
-                
-                    VinculacionConLaEmpresa vin = new VinculacionConLaEmpresa(vincJSON.getJSONObject(i));
-                    vinculacionesConLaEmpresa.add(vin);
-                }
+                roles = new ArrayList<>();
+                disponibilidades = new ArrayList<>();
+                vinculacionesConLaEmpresa = new ArrayList<>();
         
             }catch (Exception e){
                 e.printStackTrace();
@@ -88,7 +65,7 @@ public class Empleado {
     
     public String getVinculacionActual(){
         
-       String tipoVin = "";
+       /*String tipoVin = "";
        LocalDate fechaProxima;
        
        VinculacionConLaEmpresa vin;
@@ -104,8 +81,8 @@ public class Empleado {
                fechaProxima = vin.getFechaInicio();
            }
        }
-        System.out.println("VINCULACION ACTUAL ----->" +tipoVin);
-       return tipoVin;
+        System.out.println("VINCULACION ACTUAL ----->" +tipoVin);*/
+       return "Contratado";
     }
     public String getDisponibilidadActual(){
         /*String tipoDisp = "";

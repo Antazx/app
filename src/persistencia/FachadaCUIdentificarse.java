@@ -44,7 +44,7 @@ public class FachadaCUIdentificarse {
     }
     
     public JSONArray getRoles(String dni) {
-        return gestorRol.readEmpleado(dni);
+        return gestorRol.readRol(dni);
     }
 
     public JSONArray getDisponibilidad(String dni) {

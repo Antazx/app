@@ -20,14 +20,10 @@ public class Rol {
     private String tipoRol;
     private LocalDate comienzoEnRol;
     
-    public Rol(JSONObject rol) {
-        try{
-            this.tipoRol = rol.getString("tipoRol");
-            this.comienzoEnRol = ((java.sql.Date) rol.get("comienzoEnRol")).toLocalDate();
-            
-        }catch(JSONException ex){
-            Logger.getLogger(Rol.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public Rol(JSONObject rol) throws JSONException {
+        
+        this.tipoRol = rol.getString("tipoRol");
+        this.comienzoEnRol = ((java.sql.Date) rol.get("comienzoEnRol")).toLocalDate();
     }
     
     public String getTipoRol(){
