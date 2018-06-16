@@ -7,6 +7,7 @@ package interfaz.vistas;
 
 import interfaz.controladores.CtrVistaConsultarFacturas;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -24,8 +25,8 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
         initComponents();
         controlador = new CtrVistaConsultarFacturas(this);
         error.setVisible(false);
-        proovedorText.setVisible(false);
-        proovedorCombo.setVisible(false);
+        proveedorText.setVisible(false);
+        proveedorCombo.setVisible(false);
         
     }
     
@@ -46,12 +47,13 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         fechaFin = new datechooser.beans.DateChooserCombo();
         error = new javax.swing.JLabel();
-        proovedorText = new javax.swing.JLabel();
-        proovedorCombo = new javax.swing.JComboBox<>();
+        proveedorText = new javax.swing.JLabel();
+        proveedorCombo = new javax.swing.JComboBox<>();
         scrollPanel = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         cancelar = new javax.swing.JButton();
         consultar = new javax.swing.JButton();
+        Todas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,9 +67,7 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
         error.setForeground(new java.awt.Color(255, 0, 51));
         error.setText("Error");
 
-        proovedorText.setText("Proovedor:");
-
-        proovedorCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        proveedorText.setText("Proovedor:");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -80,6 +80,18 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
         consultar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 consultarMousePressed(evt);
+            }
+        });
+
+        Todas.setText("Todas las facturas");
+        Todas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                TodasMousePressed(evt);
+            }
+        });
+        Todas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TodasActionPerformed(evt);
             }
         });
 
@@ -96,9 +108,9 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(proovedorText)
+                            .addComponent(proveedorText)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(proovedorCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(proveedorCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addGap(18, 18, 18)
@@ -108,10 +120,12 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(consultar, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(56, 56, 56)
+                        .addComponent(consultar, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(Todas, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
                 .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,12 +147,13 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
                         .addComponent(error)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(proovedorText)
-                            .addComponent(proovedorCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(proveedorText)
+                            .addComponent(proveedorCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cancelar)
-                            .addComponent(consultar))))
+                            .addComponent(consultar)
+                            .addComponent(Todas))))
                 .addGap(23, 23, 23))
         );
 
@@ -146,8 +161,35 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void consultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarMousePressed
-        controlador.procesaEventoIntroduceDatos();
+        
+        ArrayList<String> proveedores;
+        
+        proveedores = controlador.procesaEventoIntroduceDatos();
+        if(proveedores.size()>0){
+            for(int i=0;i<proveedores.size();i++){
+            proveedorCombo.addItem(proveedores.get(i));
+            }
+            proveedorText.setVisible(true);
+            proveedorCombo.setVisible(true);
+        }
     }//GEN-LAST:event_consultarMousePressed
+
+    private void TodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TodasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TodasActionPerformed
+
+    private void TodasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TodasMousePressed
+        ArrayList<String> proveedores;
+        
+        proveedores = controlador.procesaEventoTodasLasFacturas();
+        if(proveedores.size()>0){
+            for(int i=0;i<proveedores.size();i++){
+            proveedorCombo.addItem(proveedores.get(i));
+            }
+            proveedorText.setVisible(true);
+            proveedorCombo.setVisible(true);
+        }
+    }//GEN-LAST:event_TodasMousePressed
      public LocalDate getFechaInicio(){
         
         int dia = fechaInicio.getCurrent().get(Calendar.DAY_OF_MONTH);
@@ -203,6 +245,7 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Todas;
     private javax.swing.JButton cancelar;
     private javax.swing.JButton consultar;
     private javax.swing.JLabel error;
@@ -212,8 +255,8 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JComboBox<String> proovedorCombo;
-    private javax.swing.JLabel proovedorText;
+    private javax.swing.JComboBox<String> proveedorCombo;
+    private javax.swing.JLabel proveedorText;
     private javax.swing.JScrollPane scrollPanel;
     // End of variables declaration//GEN-END:variables
 

@@ -27,9 +27,9 @@ public class CtrlCUConsultarFacturas {
     ArrayList<Proveedor> proovedores;
     
 
-    public String getProveedores(LocalDate fechaInicio, LocalDate fechaFin) {
+    public ArrayList<String> getProveedores(LocalDate fechaInicio, LocalDate fechaFin) {
         
-        String proveedores = "";
+        ArrayList<String> proveedores = new ArrayList();
         int i;
         JSONArray facturasJ = fachada.getFacturas(fechaInicio, fechaFin);
         
@@ -53,14 +53,19 @@ public class CtrlCUConsultarFacturas {
                         String proveedorS = pedidoI.getString("proveedor");
 
                         JSONObject proveedorI = fachada.getProveedor(proveedorS);
+                        
                         Proveedor proveedor = new Proveedor(proveedorI);
 
                         System.out.println(proveedorI.toString());
 
                         pedido.setProveedor(proveedor);
                         factura.setPedido(pedido);
-
-                        proveedores += proveedor.getNombre() +"\n";
+                        
+                        if(!proveedores.contains(proveedor.getNombre()))
+                            proveedores.add(proveedor.getNombre());
+                        
+                    }else{
+                        System.out.println("pedido nulo porque no esta pendiente "+ idPedido);
                     }
            
                 }
