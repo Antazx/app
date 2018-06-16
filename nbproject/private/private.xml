@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Mario/clase/app/src/interfaz/controladores/CtrlVistaIdentificarse.java</file>
-            <file>file:/Users/Mario/clase/app/src/negocio/modelos/Empleado.java</file>
-            <file>file:/Users/Mario/clase/app/src/negocio/modelos/Disponibilidad.java</file>
-            <file>file:/Users/Mario/clase/app/src/negocio/controladoresCU/CtrlCUIdentificarse.java</file>
-            <file>file:/Users/Mario/clase/app/src/persistencia/FachadaPersistencia.java</file>
-            <file>file:/Users/Mario/clase/app/src/negocio/modelos/Rol.java</file>
-            <file>file:/Users/Mario/clase/app/src/interfaz/gestor/GestorInterfaces.java</file>
+            <file>file:/Users/Mario/clase/app/src/persistencia/gestores/GestorProveedor.java</file>
+            <file>file:/Users/Mario/clase/app/src/interfaz/controladores/CtrVistaConsultarFacturas.java</file>
+            <file>file:/Users/Mario/clase/app/src/persistencia/gestores/GestorPedido.java</file>
+            <file>file:/Users/Mario/clase/app/src/negocio/controladoresCU/CtrlCUConsultarFacturas.java</file>
+            <file>file:/Users/Mario/clase/app/src/persistencia/Fachadas/FachadaCUConsultarFacturas.java</file>
+            <file>file:/Users/Mario/clase/app/src/persistencia/gestores/GestorFactura.java</file>
+            <file>file:/Users/Mario/clase/app/src/interfaz/vistas/VistaConsultarFacturas.java</file>
+            <file>file:/Users/Mario/clase/app/src/negocio/modelos/PedidoAProveedor.java</file>
         </group>
     </open-files>
 </project-private>
