@@ -238,13 +238,20 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextArea jTextArea1;
-    public javax.swing.JComboBox<String> proveedorCombo;
-    public javax.swing.JLabel proveedorText;
+    private javax.swing.JComboBox<String> proveedorCombo;
+    private javax.swing.JLabel proveedorText;
     private javax.swing.JScrollPane scrollPanel;
     // End of variables declaration//GEN-END:variables
 
     public void mostrarError(String msg) {
         error.setText(msg);
         error.setVisible(true);
+    }
+    public void añadirProveedor(String proveedor){
+        proveedorCombo.addItem(proveedor);
+    }
+    public void mostrarProveedores(){
+        proveedorText.setVisible(true);
+        proveedorCombo.setVisible(true);
     }
 }

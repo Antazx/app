@@ -59,10 +59,9 @@ public class CtrVistaConsultarFacturas {
     public void mostrarProveedores(ArrayList<String> proveedores){
         if(proveedores.size()>0){
             for(int i=0;i<proveedores.size();i++){
-            vista.proveedorCombo.addItem(proveedores.get(i));
+            vista.añadirProveedor(proveedores.get(i));
             }
-            vista.proveedorText.setVisible(true);
-            vista.proveedorCombo.setVisible(true);
+            vista.mostrarProveedores();
         }
         
     }
