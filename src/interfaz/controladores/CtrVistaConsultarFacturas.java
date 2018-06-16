@@ -28,7 +28,7 @@ public class CtrVistaConsultarFacturas {
         LocalDate fechaFin = vista.getFechaFin();
         
         if(fechasCorrectas(fechaInicio, fechaFin)){
-            controladorCU.getProovedores(fechaInicio, fechaFin);
+            String proveedores = controladorCU.getProveedores(fechaInicio, fechaFin);
         } else {
             vista.mostrarError("Las fechas introducidas no son validas");
         }

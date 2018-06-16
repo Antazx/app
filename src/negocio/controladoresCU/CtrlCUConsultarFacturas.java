@@ -7,8 +7,14 @@ package negocio.controladoresCU;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import persistencia.gestores.GestorProveedor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import negocio.modelos.Factura;
 import negocio.modelos.Proveedor;
+import negocio.modelos.PedidoAProveedor;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import persistencia.Fachadas.FachadaCUConsultarFacturas;
 
 /**
@@ -21,9 +27,40 @@ public class CtrlCUConsultarFacturas {
     ArrayList<Proveedor> proovedores;
     
 
-    public void getProovedores(LocalDate fechaInicio, LocalDate fechaFin) {
+    public String getProveedores(LocalDate fechaInicio, LocalDate fechaFin) {
         
-        //proovedores = gestor.getProovedores(fechaInicio, fechaFin);
+        String proveedores = "";
+        int i;
+        JSONArray facturasJ = fachada.getFacturas(fechaInicio, fechaFin);
+        System.out.println(facturasJ.toString());
+        
+        try {
+                for (i = 0; i < facturasJ.length(); i++){
+                    
+                    JSONObject factI = facturasJ.getJSONObject(i);
+                    Factura factura = new Factura(factI);
+                    int idPedido = factI.getInt("pedido");
+                    
+                    JSONObject pedidoI = fachada.getPedido(idPedido);
+                    PedidoAProveedor pedido = new PedidoAProveedor(pedidoI);
+                    String proveedorS = pedidoI.getString("proveedor");
+                    
+                    JSONObject proveedorI = fachada.getProveedor(proveedorS);
+                    Proveedor proveedor = new Proveedor(proveedorI);
+                    
+                    pedido.setProveedor(proveedor);
+                    factura.setPedido(pedido);
+                    
+                    proveedores += proveedor.getNombre() +"\n";
+           
+                }
+        } catch (JSONException ex) {
+                Logger.getLogger(CtrlCUConsultarFacturas.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return proveedores;
     }
-    
+        //JSONArray pedidosJ = fachada.getPedidos();
+        //JSONArray proveedoresJ = fachada.getProveedores();
 }
+    
+
