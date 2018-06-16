@@ -161,17 +161,7 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void consultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarMousePressed
-        
-        ArrayList<String> proveedores;
-        
-        proveedores = controlador.procesaEventoIntroduceDatos();
-        if(proveedores.size()>0){
-            for(int i=0;i<proveedores.size();i++){
-            proveedorCombo.addItem(proveedores.get(i));
-            }
-            proveedorText.setVisible(true);
-            proveedorCombo.setVisible(true);
-        }
+        controlador.procesaEventoIntroduceDatos();
     }//GEN-LAST:event_consultarMousePressed
 
     private void TodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TodasActionPerformed
@@ -179,16 +169,9 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
     }//GEN-LAST:event_TodasActionPerformed
 
     private void TodasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TodasMousePressed
-        ArrayList<String> proveedores;
+
+        controlador.procesaEventoTodasLasFacturas();
         
-        proveedores = controlador.procesaEventoTodasLasFacturas();
-        if(proveedores.size()>0){
-            for(int i=0;i<proveedores.size();i++){
-            proveedorCombo.addItem(proveedores.get(i));
-            }
-            proveedorText.setVisible(true);
-            proveedorCombo.setVisible(true);
-        }
     }//GEN-LAST:event_TodasMousePressed
      public LocalDate getFechaInicio(){
         
@@ -255,8 +238,8 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JComboBox<String> proveedorCombo;
-    private javax.swing.JLabel proveedorText;
+    public javax.swing.JComboBox<String> proveedorCombo;
+    public javax.swing.JLabel proveedorText;
     private javax.swing.JScrollPane scrollPanel;
     // End of variables declaration//GEN-END:variables
 

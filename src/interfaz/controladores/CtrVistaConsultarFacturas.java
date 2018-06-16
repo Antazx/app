@@ -25,20 +25,21 @@ public class CtrVistaConsultarFacturas {
         this.vista = vista;
         controladorCU = new CtrlCUConsultarFacturas();
     }
-    public ArrayList<String> procesaEventoIntroduceDatos() {
+    public void procesaEventoIntroduceDatos() {
         
         LocalDate fechaInicio = vista.getFechaInicio();
         LocalDate fechaFin = vista.getFechaFin();
-        ArrayList<String> proveedores = new ArrayList();
+         
         
         if(fechasCorrectas(fechaInicio, fechaFin)){
-            proveedores = controladorCU.getProveedores(fechaInicio, fechaFin);
+           ArrayList<String> proveedores = controladorCU.getProveedores(fechaInicio, fechaFin);
+           mostrarProveedores(proveedores);
             
         } else {
             vista.mostrarError("Las fechas introducidas no son validas");
         }
         
-        return proveedores;
+    
     }
 
     private boolean fechasCorrectas(LocalDate fechaInicio, LocalDate fechaFin) {
@@ -48,13 +49,22 @@ public class CtrVistaConsultarFacturas {
         return ok;
     }
 
-    public ArrayList<String> procesaEventoTodasLasFacturas() {
+    public void procesaEventoTodasLasFacturas() {
         LocalDate fechaInicio = LocalDate.of(1602,3,20);
         LocalDate fechaFin = LocalDate.of(9999, 12, 31);
         
         ArrayList<String> proveedores = controladorCU.getProveedores(fechaInicio, fechaFin);
+        mostrarProveedores(proveedores);
+    }
+    public void mostrarProveedores(ArrayList<String> proveedores){
+        if(proveedores.size()>0){
+            for(int i=0;i<proveedores.size();i++){
+            vista.proveedorCombo.addItem(proveedores.get(i));
+            }
+            vista.proveedorText.setVisible(true);
+            vista.proveedorCombo.setVisible(true);
+        }
         
-        return proveedores;
     }
     
 }
