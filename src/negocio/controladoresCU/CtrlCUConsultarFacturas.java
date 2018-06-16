@@ -32,26 +32,36 @@ public class CtrlCUConsultarFacturas {
         String proveedores = "";
         int i;
         JSONArray facturasJ = fachada.getFacturas(fechaInicio, fechaFin);
-        System.out.println(facturasJ.toString());
+        
         
         try {
                 for (i = 0; i < facturasJ.length(); i++){
                     
+                    System.out.println(facturasJ.get(i).toString());
+                    
                     JSONObject factI = facturasJ.getJSONObject(i);
                     Factura factura = new Factura(factI);
                     int idPedido = factI.getInt("pedido");
+                  
                     
                     JSONObject pedidoI = fachada.getPedido(idPedido);
-                    PedidoAProveedor pedido = new PedidoAProveedor(pedidoI);
-                    String proveedorS = pedidoI.getString("proveedor");
-                    
-                    JSONObject proveedorI = fachada.getProveedor(proveedorS);
-                    Proveedor proveedor = new Proveedor(proveedorI);
-                    
-                    pedido.setProveedor(proveedor);
-                    factura.setPedido(pedido);
-                    
-                    proveedores += proveedor.getNombre() +"\n";
+                    if(pedidoI!=null){
+                        
+                        PedidoAProveedor pedido = new PedidoAProveedor(pedidoI);
+                        System.out.println(pedidoI.toString());
+
+                        String proveedorS = pedidoI.getString("proveedor");
+
+                        JSONObject proveedorI = fachada.getProveedor(proveedorS);
+                        Proveedor proveedor = new Proveedor(proveedorI);
+
+                        System.out.println(proveedorI.toString());
+
+                        pedido.setProveedor(proveedor);
+                        factura.setPedido(pedido);
+
+                        proveedores += proveedor.getNombre() +"\n";
+                    }
            
                 }
         } catch (JSONException ex) {

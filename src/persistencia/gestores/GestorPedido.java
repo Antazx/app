@@ -43,7 +43,7 @@ public class GestorPedido {
         try{
         
             PreparedStatement stmt = conn.prepareStatement("select * from PEDIDOAPROVEEDOR where (NUMERODEPEDIDO = ?) and (ESTAPENDIENTE = '1')");
-            stmt.setInt(1, idPedido);
+            stmt.setInt(1,idPedido);
             ResultSet rs = stmt.executeQuery();
             
             if(rs.next()){

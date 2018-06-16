@@ -28,7 +28,7 @@ public class PedidoAProveedor {
                 this.numeroPedido = pedidoI.getInt("numeroDePedido");
                 this.fechaDeRealizacion = ((java.sql.Date) pedidoI.get("fechaDeRealizacion")).toLocalDate();
                 
-                if(pedidoI.getBoolean("estaPendiente")){
+                if(pedidoI.getInt("estaPendiente")==1){
                     this.estaPendiente = true;
                 }else{
                     this.estaPendiente = false;
