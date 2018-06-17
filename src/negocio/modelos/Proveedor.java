@@ -5,6 +5,7 @@
  */
 package negocio.modelos;
     
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONException;
@@ -21,6 +22,8 @@ public class Proveedor {
     private String nombre;
     private String telefono;
     private String email;
+    
+    ArrayList<PedidoAProveedor> pedidos = new ArrayList<>();
     
     public Proveedor(JSONObject js){
         if(js != null){
@@ -39,6 +42,12 @@ public class Proveedor {
 
     public String getNombre() {
         return nombre;
+    }
+    public String getCIF(){
+        return cif;
+    }
+    public void setPedidoPendiente(PedidoAProveedor pedido){
+        pedidos.add(pedido);
     }
     
 }

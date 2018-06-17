@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -60,5 +62,34 @@ public class GestorPedido {
         }
         
         return json;
+    }
+
+    public JSONArray getPedidosPendientes(String cif) {
+        
+        JSONArray pedidos = new JSONArray(new ArrayList());
+        JSONObject json;
+        
+        try{
+        
+            PreparedStatement stmt = conn.prepareStatement("select * from PEDIDOAPROVEEDOR where (PROVEEDOR = ?) and (ESTAPENDIENTE = '1')");
+            stmt.setString(1, cif);
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){ 
+                
+                json = new JSONObject();
+                json.put("numeroDePedido" , rs.getString("NUMERODEPEDIDO"));
+                json.put("fechaDeRealizacion", rs.getString("FECHADEREALIZACION"));
+                json.put("estaPendiente", rs.getString("ESTAPENDIENTE"));
+                json.put("proveedor", rs.getString("PROVEEDOR"));
+                
+                pedidos.put(json);
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        System.out.println(pedidos.toString());
+        return pedidos;
     }
 }

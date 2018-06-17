@@ -85,4 +85,30 @@ public class GestorProveedor {
         
         return json;
     }
+
+    public JSONArray readAllProveedores() {
+        JSONArray proveedores = new JSONArray(new ArrayList());
+        JSONObject json;
+        
+        try{
+        
+            PreparedStatement stmt = conn.prepareStatement("select * from PROVEEDOR");
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){ 
+                
+                json = new JSONObject();
+                json.put("cif" , rs.getString("CIF"));
+                json.put("nombre", rs.getString("NOMBRE"));
+                json.put("telefono", rs.getString("TELEFONO"));
+                json.put("email", rs.getString("EMAIL"));
+                
+                proveedores.put(json);
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return proveedores;
+    }
 }

@@ -49,5 +49,13 @@ public class FachadaCUConsultarFacturas {
     public JSONObject getProveedor(String proveedorS) {
         return gestorProveedor.readProveedor(proveedorS);
     }
+
+    public JSONArray getAllProveedor() {
+        return gestorProveedor.readAllProveedores();
+    }
+
+    public JSONArray getPedidosPendientes(String cif) {
+        return gestorPedidos.getPedidosPendientes(cif);
+    }
     
 }

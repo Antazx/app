@@ -24,12 +24,33 @@ import persistencia.Fachadas.FachadaCUConsultarFacturas;
 public class CtrlCUConsultarFacturas {
     
     FachadaCUConsultarFacturas fachada = FachadaCUConsultarFacturas.getInstance();
-    ArrayList<Proveedor> proovedores;
+    ArrayList<Factura> facturas;
+    ArrayList<Proveedor> proveedores = new ArrayList<>();
     
 
     public String getProveedores(LocalDate fechaInicio, LocalDate fechaFin) {
         
-        String proveedores = "";
+        String proveedoreS = "";
+        JSONArray proveedoresJ = fachada.getAllProveedor();
+       
+            
+            try {
+                
+                for (int i = 0; i < proveedoresJ.length(); i++){
+            
+                    Proveedor prov = new Proveedor(proveedoresJ.getJSONObject(i));
+                    proveedores.add(prov);
+                    proveedoreS += prov.getNombre()+";";
+                }
+                
+            } catch (JSONException ex) {
+                Logger.getLogger(CtrlCUConsultarFacturas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return proveedoreS;
+        }
+        
+        
+        /*String noHay = "No hay facturas pendientes para el periodo indicado";
         int i;
         JSONArray facturasJ = fachada.getFacturas(fechaInicio, fechaFin);
         System.out.println(facturasJ.toString());
@@ -42,16 +63,25 @@ public class CtrlCUConsultarFacturas {
                     int idPedido = factI.getInt("pedido");
                     
                     JSONObject pedidoI = fachada.getPedido(idPedido);
-                    PedidoAProveedor pedido = new PedidoAProveedor(pedidoI);
-                    String proveedorS = pedidoI.getString("proveedor");
+                    if(pedidoI != null){
+                        
+                        PedidoAProveedor pedido = new PedidoAProveedor(pedidoI);
+                        String proveedorS = pedidoI.getString("proveedor");
+
+                        JSONObject proveedorI = fachada.getProveedor(proveedorS);
+                        Proveedor proveedor = new Proveedor(proveedorI);
+
+                        pedido.setProveedor(proveedor);
+                        factura.setPedido(pedido);
+                        facturas.add(factura);
+                        
+                        proveedores += proveedor.getNombre() +";";
+                        
+                    } else {
+                        
+                        return noHay;
+                    }
                     
-                    JSONObject proveedorI = fachada.getProveedor(proveedorS);
-                    Proveedor proveedor = new Proveedor(proveedorI);
-                    
-                    pedido.setProveedor(proveedor);
-                    factura.setPedido(pedido);
-                    
-                    proveedores += proveedor.getNombre() +"\n";
            
                 }
         } catch (JSONException ex) {
@@ -60,7 +90,18 @@ public class CtrlCUConsultarFacturas {
         return proveedores;
     }
         //JSONArray pedidosJ = fachada.getPedidos();
-        //JSONArray proveedoresJ = fachada.getProveedores();
+        //JSONArray proveedoresJ = fachada.getProveedores();*/
+
+    public String getFacturas(int select) {
+        
+        Proveedor selProv = proveedores.get(select);
+        System.out.println("CUCUCU: "+selProv.getNombre());
+        JSONArray pedidosPendientes = fachada.getPedidosPendientes(selProv.getCIF());
+        for (int i = 0; i < pedidosPendientes.length(); i++){
+            
+        }
+        return "";
+    }
 }
     
 
