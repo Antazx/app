@@ -28,7 +28,7 @@ public class CtrlCUConsultarFacturas {
     ArrayList<Proveedor> proveedores = new ArrayList<>();
     
 
-    public String getProveedores(LocalDate fechaInicio, LocalDate fechaFin) {
+    public String getProveedores() {
         
         String proveedoreS = "";
         JSONArray proveedoresJ = fachada.getAllProveedor();
@@ -92,15 +92,60 @@ public class CtrlCUConsultarFacturas {
         //JSONArray pedidosJ = fachada.getPedidos();
         //JSONArray proveedoresJ = fachada.getProveedores();*/
 
-    public String getFacturas(int select) {
+    public String getFacturas(int select, LocalDate fechaInicio, LocalDate fechaFin) {
         
         Proveedor selProv = proveedores.get(select);
-        System.out.println("CUCUCU: "+selProv.getNombre());
+        System.out.println("PROVEEDOR SELECCIONADO: " +selProv.getNombre());
+        
         JSONArray pedidosPendientes = fachada.getPedidosPendientes(selProv.getCIF());
-        for (int i = 0; i < pedidosPendientes.length(); i++){
+        
+            try {
+                
+                for (int i = 0; i < pedidosPendientes.length(); i++){
+                    
+                    PedidoAProveedor ped = new PedidoAProveedor(pedidosPendientes.getJSONObject(i));
+                    System.out.println("PEDIDO ENCONTRADO: " +ped.getNumero());
+                    
+                    JSONObject factura = fachada.getFacturas(select, fechaInicio, fechaFin);
+                    
+                    if (factura != null){
+                        System.out.println("FACTURA ENCONTRADA: " +factura.toString());
+                        Factura fact = new Factura(factura);
+                        ped.setFactura(fact);
+                    }
+                    selProv.setPedidoPendiente(ped);
+                }
+                
+            } catch (JSONException ex) {
+                Logger.getLogger(CtrlCUConsultarFacturas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        String informe = "INFORME FACTURAS DEL PROVEEDOR: " +selProv.getNombre() +" (" +fechaInicio.toString()
+                +" -- " +fechaFin.toString() +"):\n";
+        
+        ArrayList<PedidoAProveedor> pedidosP = selProv.getPedidos();
+        for (int i = 0; i < pedidosP.size(); i++){
             
+            PedidoAProveedor pedI= pedidosP.get(i);
+            Factura factI = pedI.getFactura();
+            
+            if(factI != null && fechasFactura(factI.getFecha(), fechaInicio, fechaFin)){
+                System.out.println("HAY FACTURAS EN ESA FECHA !!!!");
+                String infI = "--NUMERO DE PEDIDO: " +pedI.getNumero() +" CON IMPORTE: " +factI.getImporte() +"€";
+                String fechI = "-----FECHA DE REALIZACION: " +pedI.getFecha() +" FECHA DE EMISION FACTURA: " +factI.getFecha();
+                informe =informe +infI +fechI +"/n";
+            }
         }
-        return "";
+        
+        return informe;
+    }
+
+    private boolean fechasFactura(LocalDate fechaFactura, LocalDate fechaInicio, LocalDate fechaFin) {
+        if((fechaInicio.isBefore(fechaFactura) || fechaInicio.isEqual(fechaFactura)) 
+                && (fechaFin.isAfter(fechaFactura)|| fechaFin.isEqual(fechaFactura))){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
     

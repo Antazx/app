@@ -46,14 +46,14 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
         fechaInicio = new datechooser.beans.DateChooserCombo();
         jLabel3 = new javax.swing.JLabel();
         fechaFin = new datechooser.beans.DateChooserCombo();
-        error = new javax.swing.JLabel();
         proveedorText = new javax.swing.JLabel();
         proveedorCombo = new javax.swing.JComboBox<>();
         scrollPanel = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textFacturas = new javax.swing.JTextArea();
         cancelar = new javax.swing.JButton();
         consultar = new javax.swing.JButton();
         consultarFacturas = new javax.swing.JButton();
+        error = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,9 +63,6 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
         jLabel2.setText("Consultar  facturas  pendientes  de  pago:");
 
         jLabel3.setText("Fecha Fin:");
-
-        error.setForeground(new java.awt.Color(255, 0, 51));
-        error.setText("Error");
 
         proveedorText.setText("Proveedor:");
 
@@ -80,10 +77,11 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setEnabled(false);
-        scrollPanel.setViewportView(jTextArea1);
+        textFacturas.setColumns(20);
+        textFacturas.setRows(5);
+        textFacturas.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        textFacturas.setEnabled(false);
+        scrollPanel.setViewportView(textFacturas);
 
         cancelar.setText("Cancelar");
         cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,33 +104,34 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
             }
         });
 
+        error.setForeground(new java.awt.Color(255, 0, 0));
+        error.setText("ERROR");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(consultar, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(consultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(proveedorText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(proveedorCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(fechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(error, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(consultarFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(proveedorText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(proveedorCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(fechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fechaFin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(consultarFacturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -158,9 +157,9 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
                             .addComponent(proveedorCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(error)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addComponent(consultarFacturas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cancelar)
                             .addComponent(consultar))))
@@ -171,8 +170,8 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void consultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarMousePressed
-        controlador.procesaEventoIntroduceDatos();
         error.setVisible(false);
+        controlador.procesaEventoIntroduceDatos();  
     }//GEN-LAST:event_consultarMousePressed
 
     private void cancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarMousePressed
@@ -193,7 +192,6 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
 
     private void consultarFacturasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarFacturasMousePressed
         // TODO add your handling code here:
-        error.setVisible(false);
         controlador.procesaEventoProveedorSel();
     }//GEN-LAST:event_consultarFacturasMousePressed
      public LocalDate getFechaInicio(){
@@ -260,14 +258,15 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JComboBox<String> proveedorCombo;
     private javax.swing.JLabel proveedorText;
     private javax.swing.JScrollPane scrollPanel;
+    private javax.swing.JTextArea textFacturas;
     // End of variables declaration//GEN-END:variables
 
     public void mostrarError(String msg) {
         
+        System.out.println("MOSTRAR ERROR: " +msg);
         error.setText(msg);
         error.setVisible(true);
     }
@@ -280,5 +279,9 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
 
     public int getNombreProveedor() {
         return proveedorCombo.getSelectedIndex();
+    }
+
+    public void mostraFacturas(String datosFactura) {
+       textFacturas.setText(datosFactura);
     }
 }

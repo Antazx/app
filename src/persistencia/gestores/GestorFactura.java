@@ -76,5 +76,34 @@ public class GestorFactura {
         }
        return list; 
     }
+
+    public JSONObject readFacturas(int select, LocalDate fechaInicio, LocalDate fechaFin) {
+        
+        JSONObject json = null;
+        try{
+        
+            PreparedStatement stmt = conn.prepareStatement("select * from FACTURA where PEDIDO = 1");
+            //stmt.setString(1, Integer.toString(select));
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                
+                System.out.println("ENTRA GESTOR FACTURA");
+                json = new JSONObject();
+                json.put("id", rs.getInt("ID"));
+                json.put("fechaDeEmision", rs.getDate("FECHADEEMISION"));
+                json.put("importe", rs.getDouble("IMPORTE"));
+                json.put("cuentaBancaria", rs.getString("CUENTABANCARIA"));
+                json.put("pedido", rs.getInt("PEDIDO"));
+                json.put("enTransferencia", rs.getInt("ENTRANSFERENCIA"));
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        System.out.println(json.toString());
+        return json;
+    }
     
 }

@@ -28,13 +28,9 @@ public class CtrVistaConsultarFacturas {
         LocalDate fechaInicio = vista.getFechaInicio();
         LocalDate fechaFin = vista.getFechaFin();
         
-        System.out.println("FechaInicio: " +fechaInicio.toString() +" fechafin: " +fechaFin);
-        
-        String[] proveedorI;
-        
         if(fechasCorrectas(fechaInicio, fechaFin)){
             
-            String proveedores = controladorCU.getProveedores(fechaInicio, fechaFin);
+            String proveedores = controladorCU.getProveedores();
             proveedoresList = proveedores.split(";");
             
             for (String proveedorI1 : proveedoresList) {
@@ -47,19 +43,20 @@ public class CtrVistaConsultarFacturas {
     }
 
     private boolean fechasCorrectas(LocalDate fechaInicio, LocalDate fechaFin) {
-        boolean ok = false;
-        if (fechaFin.isBefore(fechaInicio)){
-                System.out.println("FEchaOK");
-                ok = true;
+     
+        if (fechaFin.isAfter(fechaInicio) || fechaInicio.isEqual(fechaFin)){
+            return true;
+        }else{
+            return false;
         }
-        return ok;
     }
 
     public void procesaEventoProveedorSel() {
         int nombre = vista.getNombreProveedor();
+        LocalDate fechaInicio = vista.getFechaInicio();
+        LocalDate fechaFin = vista.getFechaFin();
         
-        String datosFactura = controladorCU.getFacturas(nombre);
-        
+        String datosFactura = controladorCU.getFacturas(nombre, fechaInicio, fechaFin);
+        vista.mostraFacturas(datosFactura);
     }
-    
 }

@@ -89,7 +89,7 @@ public class GestorPedido {
         }catch(Exception e){
             e.printStackTrace();
         }
-        System.out.println(pedidos.toString());
+        
         return pedidos;
     }
 }

@@ -20,13 +20,14 @@ public class PedidoAProveedor {
     private int numeroPedido;
     private LocalDate fechaDeRealizacion;
     private boolean estaPendiente;
-    private Proveedor proveedor;
+    private Factura factura;
     
     public PedidoAProveedor(JSONObject pedidoI) {
         if (pedidoI != null){
             try {
                 this.numeroPedido = pedidoI.getInt("numeroDePedido");
-                this.fechaDeRealizacion = ((java.sql.Date) pedidoI.get("fechaDeRealizacion")).toLocalDate();
+                System.out.println(pedidoI.toString());
+                this.fechaDeRealizacion = LocalDate.parse((CharSequence) pedidoI.get("fechaDeRealizacion"));
                 
                 if(pedidoI.getInt("estaPendiente") == 1){
                     this.estaPendiente = true;
@@ -39,8 +40,20 @@ public class PedidoAProveedor {
             
         }
     }
-    
-    public void setProveedor(Proveedor proveedor){
-        this.proveedor = proveedor;
+
+    public void setFactura(Factura fact) {
+        factura = fact;
+    }
+
+    public int getNumero() {
+        return numeroPedido;
+    }
+
+    public Factura getFactura() {
+        return factura;
+    }
+
+    public LocalDate getFecha() {
+        return fechaDeRealizacion;
     }
 }

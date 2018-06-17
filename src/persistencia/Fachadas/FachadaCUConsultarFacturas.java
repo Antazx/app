@@ -57,5 +57,9 @@ public class FachadaCUConsultarFacturas {
     public JSONArray getPedidosPendientes(String cif) {
         return gestorPedidos.getPedidosPendientes(cif);
     }
+
+    public JSONObject getFacturas(int select, LocalDate fechaInicio, LocalDate fechaFin) {
+        return gestorFacturas.readFacturas(select, fechaInicio, fechaFin);
+    }
     
 }

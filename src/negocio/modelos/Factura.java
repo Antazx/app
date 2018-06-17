@@ -41,4 +41,12 @@ public class Factura {
     public void setPedido(PedidoAProveedor pedido) {
         this.pedido = pedido;
     }
+
+    public double getImporte() {
+        return importe;
+    }
+
+    public LocalDate getFecha() {
+        return fechaDeEmision;
+    }
 }

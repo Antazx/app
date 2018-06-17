@@ -49,5 +49,7 @@ public class Proveedor {
     public void setPedidoPendiente(PedidoAProveedor pedido){
         pedidos.add(pedido);
     }
-    
+    public ArrayList<PedidoAProveedor> getPedidos(){
+        return pedidos;
+    }
 }
