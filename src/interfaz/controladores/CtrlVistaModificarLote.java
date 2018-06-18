@@ -5,10 +5,20 @@
  */
 package interfaz.controladores;
 
+import interfaz.vistas.VistaModificarLote;
+
 /**
  *
  * @author Dani
  */
 public class CtrlVistaModificarLote {
+
+    public CtrlVistaModificarLote(VistaModificarLote aThis) {
+        
+    }
+
+    public void procesaEventoIntroduceNombrePlanta() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

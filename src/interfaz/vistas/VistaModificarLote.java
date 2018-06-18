@@ -5,17 +5,22 @@
  */
 package interfaz.vistas;
 
+import interfaz.controladores.CtrlVistaModificarLote;
+
 /**
  *
  * @author Dani
  */
 public class VistaModificarLote extends javax.swing.JFrame {
 
+    private CtrlVistaModificarLote controlador;
     /**
      * Creates new form VistaModificarLote
      */
     public VistaModificarLote() {
         initComponents();
+        controlador = new CtrlVistaModificarLote(this);
+        cambiar.setVisible(false);
     }
 
     /**
@@ -30,6 +35,14 @@ public class VistaModificarLote extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        consultar = new javax.swing.JButton();
+        cancelar = new javax.swing.JButton();
+        Lotes = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        fechaCreacion = new javax.swing.JLabel();
+        estado = new javax.swing.JComboBox<>();
+        cambiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,6 +50,27 @@ public class VistaModificarLote extends javax.swing.JFrame {
         jLabel1.setText("Modificar estado de lote:");
 
         jLabel2.setText("Nombre de la planta");
+
+        consultar.setText("Consultar");
+
+        cancelar.setText("Cancelar");
+        cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cancelarMousePressed(evt);
+            }
+        });
+
+        Lotes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                LotesMousePressed(evt);
+            }
+        });
+
+        jLabel3.setText("Fecha de creación:");
+
+        jLabel4.setText("Estado actual:");
+
+        cambiar.setText("Cambiar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -48,10 +82,27 @@ public class VistaModificarLote extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(107, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(23, 23, 23)
+                                .addComponent(fechaCreacion))
+                            .addComponent(Lotes, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cancelar)
+                                .addGap(32, 32, 32)
+                                .addComponent(consultar)
+                                .addGap(29, 29, 29)
+                                .addComponent(cambiar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(82, 82, 82)
+                                .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -62,11 +113,35 @@ public class VistaModificarLote extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(Lotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(fechaCreacion))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(consultar)
+                    .addComponent(cancelar)
+                    .addComponent(cambiar))
+                .addGap(39, 39, 39))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void LotesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LotesMousePressed
+        controlador.procesaEventoIntroduceNombrePlanta();
+    }//GEN-LAST:event_LotesMousePressed
+
+    private void cancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarMousePressed
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_cancelarMousePressed
 
     /**
      * @param args the command line arguments
@@ -104,8 +179,16 @@ public class VistaModificarLote extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Lotes;
+    private javax.swing.JButton cambiar;
+    private javax.swing.JButton cancelar;
+    private javax.swing.JButton consultar;
+    private javax.swing.JComboBox<String> estado;
+    private javax.swing.JLabel fechaCreacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
