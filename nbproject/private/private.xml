@@ -4,7 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/interfaz/controladores/CtrVistaConsultarFacturas.java</file>
+            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/persistencia/Fachadas/FachadaCUConsultarFacturas.java</file>
+            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/negocio/modelos/Proveedor.java</file>
+            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/negocio/controladoresCU/CtrlCUConsultarFacturas.java</file>
+            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/negocio/modelos/Factura.java</file>
+            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/persistencia/gestores/GestorPedido.java</file>
             <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/interfaz/vistas/VistaConsultarFacturas.java</file>
+            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/persistencia/gestores/GestorFactura.java</file>
+            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/negocio/modelos/PedidoAProveedor.java</file>
         </group>
     </open-files>
 </project-private>

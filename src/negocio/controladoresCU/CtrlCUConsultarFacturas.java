@@ -106,7 +106,7 @@ public class CtrlCUConsultarFacturas {
                     PedidoAProveedor ped = new PedidoAProveedor(pedidosPendientes.getJSONObject(i));
                     System.out.println("PEDIDO ENCONTRADO: " +ped.getNumero());
                     
-                    JSONObject factura = fachada.getFacturas(select, fechaInicio, fechaFin);
+                    JSONObject factura = fachada.getFacturas(ped.getNumero(), fechaInicio, fechaFin);
                     
                     if (factura != null){
                         System.out.println("FACTURA ENCONTRADA: " +factura.toString());

@@ -31,6 +31,9 @@ public class Factura {
             try {
                 this.idFactura = facturasJ.getInt("id");
                 this.fechaDeEmision = ((java.sql.Date) facturasJ.get("fechaDeEmision")).toLocalDate();
+                this.cuentaBancaria = facturasJ.getString("cuentaBancaria");
+                this.importe = facturasJ.getDouble("importe");
+                
             
             } catch (JSONException ex) {
                 Logger.getLogger(Factura.class.getName()).log(Level.SEVERE, null, ex);
