@@ -66,5 +66,8 @@ public class GestorInterfaces {
         vistaActual.setVisible(true);
     }
     
-    
+    private void muestraInterfazModificarLote() {
+        vistaActual = new VistaModificarLote();
+        vistaActual.setVisible(true);
+    }
 }
