@@ -122,7 +122,5 @@ public class Empleado {
 
     public void addVinculacion(VinculacionConLaEmpresa vinculacionJ) {
         vinculacionesConLaEmpresa.add(vinculacionJ);
-    }
-    
-    
+    }   
 }

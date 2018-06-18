@@ -7,6 +7,7 @@ package interfaz.controladores;
 
 import interfaz.vistas.VistaConsultarFacturas;
 import java.time.LocalDate;
+import java.time.Month;
 import negocio.controladoresCU.CtrlCUConsultarFacturas;
 
 /**
@@ -52,11 +53,39 @@ public class CtrVistaConsultarFacturas {
     }
 
     public void procesaEventoProveedorSel() {
+        
         int nombre = vista.getNombreProveedor();
+        
         LocalDate fechaInicio = vista.getFechaInicio();
         LocalDate fechaFin = vista.getFechaFin();
         
-        String datosFactura = controladorCU.getFacturas(nombre, fechaInicio, fechaFin);
-        vista.mostraFacturas(datosFactura);
+        if(fechasCorrectas(fechaInicio, fechaFin)){
+            
+            String datosFactura = controladorCU.getFacturas(nombre, fechaInicio, fechaFin);
+            vista.mostraFacturas(datosFactura);
+        } else {
+            
+            vista.mostrarError("Las fechas introducidas no son validas");
+        } 
+    }
+
+    public void todasLasFacturas() {
+        
+        LocalDate actual = LocalDate.now();
+        LocalDate añoActual = LocalDate.of(actual.getYear(), Month.JANUARY, 1);
+        LocalDate añoFinal = LocalDate.of(actual.getYear(), Month.DECEMBER, 31);
+        
+        String datosFactuas = controladorCU.getAllFacturas(añoActual, añoFinal);
+        vista.mostraFacturas(datosFactuas);
+    }
+
+    public void todosLosProveedores() {
+        
+        LocalDate añoInicio = vista.getFechaInicio();
+        LocalDate añoFinal = vista.getFechaFin();
+        
+        String datosFacturas = controladorCU.getAllFacturas(añoInicio, añoFinal);
+        vista.mostraFacturas(datosFacturas);
+        
     }
 }

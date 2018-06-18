@@ -43,7 +43,6 @@ public class CtrlVistaIdentificarse {
                     vista.mostrarError(respuesta);
                     break;
                 default:
-                    System.out.println("Rol encontrado: " +respuesta);
                     GestorInterfaces.getInstancia().empleadoIdentificado(respuesta);
                     break;
             }

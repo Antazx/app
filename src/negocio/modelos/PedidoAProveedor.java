@@ -26,7 +26,6 @@ public class PedidoAProveedor {
         if (pedidoI != null){
             try {
                 this.numeroPedido = pedidoI.getInt("numeroDePedido");
-                System.out.println(pedidoI.toString());
                 this.fechaDeRealizacion = LocalDate.parse((CharSequence) pedidoI.get("fechaDeRealizacion"));
                 
                 if(pedidoI.getInt("estaPendiente") == 1){
@@ -37,7 +36,6 @@ public class PedidoAProveedor {
             } catch (JSONException ex) {
                 Logger.getLogger(PedidoAProveedor.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         }
     }
 
