@@ -21,6 +21,7 @@ public class VistaModificarLote extends javax.swing.JFrame {
         initComponents();
         controlador = new CtrlVistaModificarLote(this);
         cambiar.setVisible(false);
+        error.setVisible(false);
     }
 
     /**
@@ -33,7 +34,7 @@ public class VistaModificarLote extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nombrePlanta = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         consultar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
@@ -43,6 +44,7 @@ public class VistaModificarLote extends javax.swing.JFrame {
         fechaCreacion = new javax.swing.JLabel();
         estado = new javax.swing.JComboBox<>();
         cambiar = new javax.swing.JButton();
+        error = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,6 +54,11 @@ public class VistaModificarLote extends javax.swing.JFrame {
         jLabel2.setText("Nombre de la planta");
 
         consultar.setText("Consultar");
+        consultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                consultarMousePressed(evt);
+            }
+        });
 
         cancelar.setText("Cancelar");
         cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -72,6 +79,9 @@ public class VistaModificarLote extends javax.swing.JFrame {
 
         cambiar.setText("Cambiar");
 
+        error.setForeground(new java.awt.Color(255, 0, 51));
+        error.setText("Error");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,7 +96,7 @@ public class VistaModificarLote extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nombrePlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(23, 23, 23)
@@ -101,7 +111,8 @@ public class VistaModificarLote extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(82, 82, 82)
-                                .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(error))))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -111,7 +122,7 @@ public class VistaModificarLote extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombrePlanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(Lotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,7 +134,9 @@ public class VistaModificarLote extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(error)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(consultar)
                     .addComponent(cancelar)
@@ -135,13 +148,17 @@ public class VistaModificarLote extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LotesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LotesMousePressed
-        controlador.procesaEventoIntroduceNombrePlanta();
+        
     }//GEN-LAST:event_LotesMousePressed
 
     private void cancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarMousePressed
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_cancelarMousePressed
+
+    private void consultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarMousePressed
+        controlador.procesaEventoIntroduceNombrePlanta();
+    }//GEN-LAST:event_consultarMousePressed
 
     /**
      * @param args the command line arguments
@@ -183,12 +200,22 @@ public class VistaModificarLote extends javax.swing.JFrame {
     private javax.swing.JButton cambiar;
     private javax.swing.JButton cancelar;
     private javax.swing.JButton consultar;
+    private javax.swing.JLabel error;
     private javax.swing.JComboBox<String> estado;
     private javax.swing.JLabel fechaCreacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField nombrePlanta;
     // End of variables declaration//GEN-END:variables
+
+    public String getNombre() {
+        return nombrePlanta.getText();
+    }
+
+    public void mostrarError(String msg) {
+        error.setText(msg);
+        error.setVisible(true);
+    }
 }

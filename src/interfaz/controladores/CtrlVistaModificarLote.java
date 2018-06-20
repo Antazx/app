@@ -6,6 +6,8 @@
 package interfaz.controladores;
 
 import interfaz.vistas.VistaModificarLote;
+import negocio.controladoresCU.CtrlCUConsultarFacturas;
+import negocio.controladoresCU.CtrlCUModificarLote;
 
 /**
  *
@@ -13,12 +15,21 @@ import interfaz.vistas.VistaModificarLote;
  */
 public class CtrlVistaModificarLote {
 
-    public CtrlVistaModificarLote(VistaModificarLote aThis) {
-        
+    private VistaModificarLote vista;
+    private CtrlCUModificarLote controladorCU;
+    
+    public CtrlVistaModificarLote(VistaModificarLote vista) {
+        this.vista = vista;
+        controladorCU = new CtrlCUModificarLote();
     }
 
     public void procesaEventoIntroduceNombrePlanta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String nombre = vista.getNombre();
+        boolean ok = controladorCU.comprobarNombre(nombre);
+        if(!ok){
+            vista.mostrarError("La planta indicada no existe");
+        }else{
+            vista.mostrarError("La planta indicada SI QUE EXISTE");
+        }
     }
-    
 }
