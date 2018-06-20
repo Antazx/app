@@ -6,6 +6,7 @@
 package interfaz.controladores;
 
 import interfaz.vistas.VistaModificarLote;
+import java.util.ArrayList;
 import negocio.controladoresCU.CtrlCUConsultarFacturas;
 import negocio.controladoresCU.CtrlCUModificarLote;
 
@@ -26,10 +27,16 @@ public class CtrlVistaModificarLote {
     public void procesaEventoIntroduceNombrePlanta() {
         String nombre = vista.getNombre();
         boolean ok = controladorCU.comprobarNombre(nombre);
+        
         if(!ok){
             vista.mostrarError("La planta indicada no existe");
         }else{
-            vista.mostrarError("La planta indicada SI QUE EXISTE");
+            ArrayList<String> lotes = controladorCU.getLotes();
+            if(lotes!=null){
+                vista.mostrarError("Holi");
+            }else{
+                vista.mostrarError("No existe al menos un lote con estado distinto de 'Eliminado' asociado con la planta indicada");
+            }
         }
     }
 }

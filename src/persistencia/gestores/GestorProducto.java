@@ -57,9 +57,13 @@ public class GestorProducto {
                 json.put("precioVenta", rs.getFloat("PRECIODEVENTA"));
                 json.put("precioCompra", rs.getFloat("PRECIOCOMPRA"));
                 json.put("diasEntrega", rs.getInt("DIASPARAENTREGADELPROVEEDOR"));
-                json.put("tipoAuxiliar", rs.getString("TIPODEPRODUCTOAUXILIAR"));
+                if(rs.getString("TIPODEPRODUCTOAUXILIAR")!=null){
+                    json.put("tipoAuxiliar", rs.getString("TIPODEPRODUCTOAUXILIAR"));
+                }else{
+                    json.put("tipoAuxiliar", "20");
+                }
                 json.put("subtipo", rs.getString("SUBTIPO"));
-                json.put("plantaDeFlor", rs.getString("PLANTADELAFLOR"));
+                //json.put("plantaDeFlor", rs.getString("PLANTADELAFLOR"));
                 
             }
             
