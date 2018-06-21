@@ -7,7 +7,6 @@ package interfaz.controladores;
 
 import interfaz.vistas.VistaModificarLote;
 import java.util.ArrayList;
-import negocio.controladoresCU.CtrlCUConsultarFacturas;
 import negocio.controladoresCU.CtrlCUModificarLote;
 
 /**
@@ -18,6 +17,7 @@ public class CtrlVistaModificarLote {
 
     private VistaModificarLote vista;
     private CtrlCUModificarLote controladorCU;
+    private ArrayList<String> lotes = new ArrayList<>();
     
     public CtrlVistaModificarLote(VistaModificarLote vista) {
         this.vista = vista;
@@ -31,12 +31,32 @@ public class CtrlVistaModificarLote {
         if(!ok){
             vista.mostrarError("La planta indicada no existe");
         }else{
-            ArrayList<String> lotes = controladorCU.getLotes();
-            if(lotes!=null){
-                vista.mostrarError("Holi");
+            lotes = controladorCU.getLotes();
+            if(!lotes.isEmpty()){
+                mostrarLotes(lotes);
             }else{
                 vista.mostrarError("No existe al menos un lote con estado distinto de 'Eliminado' asociado con la planta indicada");
             }
         }
+    }
+
+    private void mostrarLotes(ArrayList<String> lotes) {
+        for (int i = 0; i < lotes.size()/3; i++) {
+            vista.añadirLote(lotes.get(i*3));
+        }
+        vista.mostrarDatosLote(lotes.get(1),lotes.get(2));
+        vista.mostrarLotes();
+    }
+
+    public void procesaEventoNuevoLoteSeleccionado() {
+        int selectedIndex = vista.getIndexLoteSeleccionado();
+        vista.mostrarDatosLote(lotes.get((selectedIndex*3)+1),lotes.get((selectedIndex*3)+2));
+    }
+
+    public void procesaEventoNuevoEstadoSeleccionado() {
+        int selectedLote = vista.getLoteSeleccionado();
+        int selectedEstado = vista.getEstadoSeleccionado();
+        
+        controladorCU.registrarCambioEstado(selectedLote, selectedEstado);
     }
 }

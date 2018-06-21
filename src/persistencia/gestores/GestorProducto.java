@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -25,8 +27,7 @@ public class GestorProducto {
         try{
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
             conn = DriverManager.getConnection(URL); 
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e){
         }
     }
     public static GestorProducto getInstance() {
@@ -60,15 +61,14 @@ public class GestorProducto {
                 if(rs.getString("TIPODEPRODUCTOAUXILIAR")!=null){
                     json.put("tipoAuxiliar", rs.getString("TIPODEPRODUCTOAUXILIAR"));
                 }else{
-                    json.put("tipoAuxiliar", "20");
+                    json.put("tipoAuxiliar", "");
                 }
                 json.put("subtipo", rs.getString("SUBTIPO"));
                 //json.put("plantaDeFlor", rs.getString("PLANTADELAFLOR"));
                 
             }
             
-        }catch(Exception e){
-            e.printStackTrace();
+        }catch(SQLException | JSONException e){
         }
         
         return json;

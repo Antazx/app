@@ -22,6 +22,17 @@ public class VistaModificarLote extends javax.swing.JFrame {
         controlador = new CtrlVistaModificarLote(this);
         cambiar.setVisible(false);
         error.setVisible(false);
+        labelEstado.setVisible(false);
+        labelFecha.setVisible(false);
+        lotes.setVisible(false);
+        estado.setVisible(false);
+        fechaCreacion.setVisible(false);
+        cancelarConfirm.setVisible(false);
+        confirmar.setVisible(false);
+        
+        for (int i = 1; i < 6; i++) {
+            estado.addItem(i+"");
+        }
     }
 
     /**
@@ -35,23 +46,25 @@ public class VistaModificarLote extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         nombrePlanta = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        labelNombre = new javax.swing.JLabel();
         consultar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
-        Lotes = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lotes = new javax.swing.JComboBox<>();
+        labelFecha = new javax.swing.JLabel();
+        labelEstado = new javax.swing.JLabel();
         fechaCreacion = new javax.swing.JLabel();
         estado = new javax.swing.JComboBox<>();
         cambiar = new javax.swing.JButton();
         error = new javax.swing.JLabel();
+        cancelarConfirm = new javax.swing.JButton();
+        confirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Modificar estado de lote:");
 
-        jLabel2.setText("Nombre de la planta");
+        labelNombre.setText("Nombre de la planta");
 
         consultar.setText("Consultar");
         consultar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -67,20 +80,39 @@ public class VistaModificarLote extends javax.swing.JFrame {
             }
         });
 
-        Lotes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                LotesMousePressed(evt);
+        lotes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lotesActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Fecha de creación:");
+        labelFecha.setText("Fecha de creación:");
 
-        jLabel4.setText("Estado actual:");
+        labelEstado.setText("Estado actual:");
 
         cambiar.setText("Cambiar");
+        cambiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cambiarMousePressed(evt);
+            }
+        });
 
         error.setForeground(new java.awt.Color(255, 0, 51));
         error.setText("Error");
+
+        cancelarConfirm.setText("Cancelar");
+        cancelarConfirm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cancelarConfirmMousePressed(evt);
+            }
+        });
+
+        confirmar.setText("Confirmar");
+        confirmar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                confirmarMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,14 +126,18 @@ public class VistaModificarLote extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(labelNombre)
                                 .addGap(18, 18, 18)
                                 .addComponent(nombrePlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(labelFecha)
                                 .addGap(23, 23, 23)
-                                .addComponent(fechaCreacion))
-                            .addComponent(Lotes, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fechaCreacion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cancelarConfirm)
+                                .addGap(18, 18, 18)
+                                .addComponent(confirmar))
+                            .addComponent(lotes, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cancelar)
                                 .addGap(32, 32, 32)
@@ -109,11 +145,11 @@ public class VistaModificarLote extends javax.swing.JFrame {
                                 .addGap(29, 29, 29)
                                 .addComponent(cambiar))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(labelEstado)
                                 .addGap(82, 82, 82)
                                 .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(error))))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,20 +159,22 @@ public class VistaModificarLote extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombrePlanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(labelNombre))
                 .addGap(18, 18, 18)
-                .addComponent(Lotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addComponent(lotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(fechaCreacion))
+                    .addComponent(labelFecha)
+                    .addComponent(fechaCreacion)
+                    .addComponent(cancelarConfirm)
+                    .addComponent(confirmar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(labelEstado)
                     .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(error)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(consultar)
                     .addComponent(cancelar)
@@ -147,10 +185,6 @@ public class VistaModificarLote extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LotesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LotesMousePressed
-        
-    }//GEN-LAST:event_LotesMousePressed
-
     private void cancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarMousePressed
         this.setVisible(false);
         this.dispose();
@@ -159,6 +193,50 @@ public class VistaModificarLote extends javax.swing.JFrame {
     private void consultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarMousePressed
         controlador.procesaEventoIntroduceNombrePlanta();
     }//GEN-LAST:event_consultarMousePressed
+
+    private void lotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lotesActionPerformed
+        controlador.procesaEventoNuevoLoteSeleccionado();
+    }//GEN-LAST:event_lotesActionPerformed
+
+    private void cambiarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarMousePressed
+        cambiar.setVisible(false);
+        error.setVisible(false);
+        labelEstado.setVisible(false);
+        labelFecha.setVisible(false);
+        lotes.setVisible(false);
+        estado.setVisible(false);
+        fechaCreacion.setVisible(false);
+        consultar.setVisible(false);
+        cancelar.setVisible(false);
+
+        if(estado.getSelectedItem().equals(3)){
+            //realiza el CU “Actualización de estimación de flores disponibles”
+        }
+        
+        cancelarConfirm.setVisible(true);
+        confirmar.setVisible(true);
+        
+    }//GEN-LAST:event_cambiarMousePressed
+
+    private void cancelarConfirmMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarConfirmMousePressed
+        cambiar.setVisible(true);
+        consultar.setVisible(false);
+        labelEstado.setVisible(true);
+        labelFecha.setVisible(true);
+        lotes.setVisible(true);
+        estado.setVisible(true);
+        fechaCreacion.setVisible(true);
+        cancelar.setVisible(true);
+        
+        cancelarConfirm.setVisible(false);
+        confirmar.setVisible(false);
+    }//GEN-LAST:event_cancelarConfirmMousePressed
+
+    private void confirmarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarMousePressed
+        controlador.procesaEventoNuevoEstadoSeleccionado();
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_confirmarMousePressed
 
     /**
      * @param args the command line arguments
@@ -196,17 +274,19 @@ public class VistaModificarLote extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> Lotes;
     private javax.swing.JButton cambiar;
     private javax.swing.JButton cancelar;
+    private javax.swing.JButton cancelarConfirm;
+    private javax.swing.JButton confirmar;
     private javax.swing.JButton consultar;
     private javax.swing.JLabel error;
     private javax.swing.JComboBox<String> estado;
     private javax.swing.JLabel fechaCreacion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel labelEstado;
+    private javax.swing.JLabel labelFecha;
+    private javax.swing.JLabel labelNombre;
+    private javax.swing.JComboBox<String> lotes;
     private javax.swing.JTextField nombrePlanta;
     // End of variables declaration//GEN-END:variables
 
@@ -217,5 +297,42 @@ public class VistaModificarLote extends javax.swing.JFrame {
     public void mostrarError(String msg) {
         error.setText(msg);
         error.setVisible(true);
+    }
+
+    public void añadirLote(String lote) {
+        lotes.addItem(lote);
+    }
+
+    public void mostrarLotes() {
+        labelNombre.setVisible(false);
+        nombrePlanta.setVisible(false);
+        cambiar.setVisible(true);
+        consultar.setVisible(false);
+        labelEstado.setVisible(true);
+        labelFecha.setVisible(true);
+        lotes.setVisible(true);
+        estado.setVisible(true);
+        fechaCreacion.setVisible(true);
+    }
+
+    public void mostrarDatosLote(String fecha, String estadoSel) {
+        fechaCreacion.setText(fecha);
+        for (int i = 0; i < estado.getItemCount(); i++) {
+            if(estado.getItemAt(i).equals(estadoSel)){
+                estado.setSelectedIndex(i);
+            }
+        }
+    }
+    
+    public int getLoteSeleccionado(){
+        return Integer.parseInt(lotes.getSelectedItem().toString());
+    }
+    
+    public int getEstadoSeleccionado(){
+        return Integer.parseInt(estado.getSelectedItem().toString());
+    }
+    
+    public int getIndexLoteSeleccionado(){
+        return lotes.getSelectedIndex();
     }
 }

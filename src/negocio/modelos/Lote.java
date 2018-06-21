@@ -41,5 +41,13 @@ public class Lote {
     public int getId() {
         return id;
     }
-    
+
+    public LocalDate getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
 }

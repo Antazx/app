@@ -41,5 +41,9 @@ public class FachadaCUModificarLote {
     public JSONArray getLotes(String codigo) {
          return gestorLote.readLotes(codigo);
     }
+
+    public void actualizarEstado(int selectedLote, int selectedEstado) {
+        gestorLote.updateLotes(selectedLote, selectedEstado);
+    }
     
 }
