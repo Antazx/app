@@ -81,7 +81,7 @@ public class GestorFactura {
         
         JSONObject json = null;
         try{
-            System.out.println("READFACTURAS == " +select);
+            
             PreparedStatement stmt = conn.prepareStatement("select * from FACTURA where PEDIDO = ?");
             stmt.setString(1, Integer.toString(select));
             
@@ -89,7 +89,7 @@ public class GestorFactura {
             
             if(rs.next()){
                 
-                System.out.println("ENTRA GESTOR FACTURA");
+         
                 json = new JSONObject();
                 json.put("id", rs.getInt("ID"));
                 json.put("fechaDeEmision", rs.getDate("FECHADEEMISION"));
