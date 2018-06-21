@@ -55,13 +55,13 @@ public class CtrVistaConsultarFacturas {
     public void procesaEventoProveedorSel() {
         
         int nombre = vista.getNombreProveedor();
-        
+        String datosFactura = "";
         LocalDate fechaInicio = vista.getFechaInicio();
         LocalDate fechaFin = vista.getFechaFin();
         
         if(fechasCorrectas(fechaInicio, fechaFin)){
             
-            String datosFactura = controladorCU.getFacturas(nombre, fechaInicio, fechaFin);
+            datosFactura = controladorCU.getFacturas(nombre, fechaInicio, fechaFin);
             vista.mostraFacturas(datosFactura);
         } else {
             
@@ -75,8 +75,9 @@ public class CtrVistaConsultarFacturas {
         LocalDate añoActual = LocalDate.of(actual.getYear(), Month.JANUARY, 1);
         LocalDate añoFinal = LocalDate.of(actual.getYear(), Month.DECEMBER, 31);
         
-        String datosFactuas = controladorCU.getAllFacturas(añoActual, añoFinal);
-        vista.mostraFacturas(datosFactuas);
+        String datosFacturas = "";
+        datosFacturas = controladorCU.getAllFacturas(añoActual, añoFinal);
+        vista.mostraFacturas(datosFacturas);
     }
 
     public void todosLosProveedores() {
@@ -84,7 +85,8 @@ public class CtrVistaConsultarFacturas {
         LocalDate añoInicio = vista.getFechaInicio();
         LocalDate añoFinal = vista.getFechaFin();
         
-        String datosFacturas = controladorCU.getAllFacturas(añoInicio, añoFinal);
+        String datosFacturas = "";
+        datosFacturas = controladorCU.getAllFacturas(añoInicio, añoFinal);
         vista.mostraFacturas(datosFacturas);
         
     }

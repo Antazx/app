@@ -24,7 +24,7 @@ import persistencia.Fachadas.FachadaCUConsultarFacturas;
 public class CtrlCUConsultarFacturas {
     
     FachadaCUConsultarFacturas fachada = FachadaCUConsultarFacturas.getInstance();
-    ArrayList<Factura> facturas;
+    ArrayList<Factura> facturas = new ArrayList<>();
     ArrayList<Proveedor> proveedores = new ArrayList<>();
     
 

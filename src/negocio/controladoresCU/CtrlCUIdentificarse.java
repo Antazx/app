@@ -79,17 +79,22 @@ public class CtrlCUIdentificarse {
         String disponibilidadS = empleadoJ.getDisponibilidadActual();
         String rolS = empleadoJ.getRolActual();
         
-        System.out.println(empleado.toString() +vinculacionS +disponibilidadS +rolS);
+        return respuesta(pass, paswS, vinculacionS, disponibilidadS, rolS);
+    }
+
+    private String respuesta(String pass, String paswS, String vinculacionS, String disponibilidadS, String rolS) {
         
         if(paswS.equals(pass)){
                 if(vinculacionS.equals("Contratado")&& disponibilidadS.equals("Trabajando")){
-                        return (respuesta = rolS);
+                        return rolS;
                 }else{
                     System.out.println("NoActivo" +vinculacionS +" " +disponibilidadS);
-                    return (respuesta = "Usuario Inactivo");
+                    return "Usuario Inactivo";
                 }
             }else{
-               return (respuesta = "La contraseña no es correcta");
+               return "La contraseña no es correcta";
             }
     }
+
+    
 }

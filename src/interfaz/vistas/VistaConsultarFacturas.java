@@ -27,7 +27,7 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
         proveedorText.setVisible(false);
         proveedorCombo.setVisible(false);
         consultarFacturas.setVisible(false);
-        
+        todosLosProveedores.setVisible(false);
     }
     
    
@@ -76,6 +76,11 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
         proveedorCombo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 proveedorComboMousePressed(evt);
+            }
+        });
+        proveedorCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proveedorComboActionPerformed(evt);
             }
         });
 
@@ -134,23 +139,25 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
                         .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(consultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel3)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(proveedorText)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(proveedorCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(proveedorText)
                         .addGap(18, 18, 18)
-                        .addComponent(fechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(proveedorCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fechaFin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(consultarFacturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(todasLasFacturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(todosLosProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(todosLosProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
@@ -169,19 +176,19 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
                             .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(proveedorText)
-                            .addComponent(proveedorCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(error)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(error)
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(proveedorCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(proveedorText))
+                        .addGap(18, 18, 18)
                         .addComponent(consultarFacturas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(todasLasFacturas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addComponent(todosLosProveedores)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(todasLasFacturas)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cancelar)
                             .addComponent(consultar))))
@@ -193,6 +200,7 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
 
     private void consultarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarMousePressed
         error.setVisible(false);
+        consultar.setVisible(false);
         controlador.procesaEventoIntroduceDatos();  
     }//GEN-LAST:event_consultarMousePressed
 
@@ -214,6 +222,7 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
 
     private void consultarFacturasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarFacturasMousePressed
         // TODO add your handling code here:
+        
         controlador.procesaEventoProveedorSel();
     }//GEN-LAST:event_consultarFacturasMousePressed
 
@@ -226,6 +235,10 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
         // TODO add your handling code here:
         controlador.todosLosProveedores();
     }//GEN-LAST:event_todosLosProveedoresMousePressed
+
+    private void proveedorComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_proveedorComboActionPerformed
      public LocalDate getFechaInicio(){
         
         int dia = fechaInicio.getCurrent().get(Calendar.DAY_OF_MONTH);
@@ -300,12 +313,14 @@ public class VistaConsultarFacturas extends javax.swing.JFrame {
 
     public void mostrarError(String msg) {
         
-        System.out.println("MOSTRAR ERROR: " +msg);
+        
         error.setText(msg);
         error.setVisible(true);
+        consultar.setVisible(true);
     }
 
     public void mostrarProveedor(String string) {
+        todosLosProveedores.setVisible(true);
         proveedorText.setVisible(true);
         proveedorCombo.setVisible(true);
         proveedorCombo.addItem(string);
