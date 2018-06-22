@@ -38,7 +38,10 @@ public class CtrlCUModificarLote {
         
         try {
             String plantaDeFlor = plantaJ.getString("plantaDeFlor");
-            JSONObject florJ = fachada.obtenerPlantaCodigo(plantaDeFlor);
+            if(!plantaDeFlor.equals("")){
+                JSONObject florJ = fachada.obtenerPlantaCodigo(plantaDeFlor);
+                planta.setPlantaDeLaFlor(new Producto(florJ));
+            }
         } catch (JSONException ex) {
             Logger.getLogger(CtrlCUConsultarFacturas.class.getName()).log(Level.SEVERE, null, ex);
         }
