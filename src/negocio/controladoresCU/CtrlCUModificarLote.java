@@ -22,7 +22,7 @@ import persistencia.Fachadas.FachadaCUModificarLote;
 public class CtrlCUModificarLote {
 
     FachadaCUModificarLote fachada = FachadaCUModificarLote.getInstance();
-    Producto planta; 
+    Producto planta;
     JSONObject plantaJ;
     String codigo;
     

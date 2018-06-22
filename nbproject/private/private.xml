@@ -4,14 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="PracticaPGP"/>
         <group>
-            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/negocio/modelos/Lote.java</file>
-            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/persistencia/gestores/GestorProducto.java</file>
-            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/interfaz/controladores/CtrlVistaModificarLote.java</file>
-            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/persistencia/Fachadas/FachadaCUModificarLote.java</file>
-            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/persistencia/gestores/GestorLote.java</file>
-            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/interfaz/vistas/VistaModificarLote.java</file>
-            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/negocio/controladoresCU/CtrlCUModificarLote.java</file>
-            <file>file:/E:/Documentos/Diseño%20de%20Software/app/src/negocio/modelos/Producto.java</file>
+            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/interfaz/controladores/CtrlVistaActualizarFlores.java</file>
+            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/negocio/controladoresCU/CtrlCUActualizarFlores.java</file>
+            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/persistencia/gestores/GestorProducto.java</file>
+            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/interfaz/vistas/VistaActualizarFlores.java</file>
+            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/interfaz/controladores/CtrlVistaModificarLote.java</file>
+            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/negocio/controladoresCU/CtrlCUModificarLote.java</file>
+            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/persistencia/Fachadas/FachadaCUModificarLote.java</file>
+            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/interfaz/vistas/VistaModificarLote.java</file>
+            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/persistencia/Fachadas/FachadaCUActualizarFlores.java</file>
         </group>
     </open-files>
 </project-private>

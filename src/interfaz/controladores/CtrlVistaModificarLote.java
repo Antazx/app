@@ -5,7 +5,6 @@
  */
 package interfaz.controladores;
 
-import interfaz.gestor.GestorInterfaces;
 import interfaz.vistas.VistaModificarLote;
 import java.util.ArrayList;
 import negocio.controladoresCU.CtrlCUModificarLote;
