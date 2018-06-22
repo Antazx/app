@@ -43,6 +43,7 @@ public class Producto {
                 this.diasParaEntregaDelProveedor = plantaJ.getInt("diasEntrega");
                 this.tipoDeProductoAuxiliar = plantaJ.getString("tipoAuxiliar");
                 this.subtipo = plantaJ.getString("subtipo");
+                
             
             } catch (JSONException ex) {
                 Logger.getLogger(Factura.class.getName()).log(Level.SEVERE, null, ex);
@@ -56,5 +57,8 @@ public class Producto {
     
     public String getCodigo() {
         return codigo;
+    }
+    public String getSubtipo() {
+        return subtipo;
     }
 }

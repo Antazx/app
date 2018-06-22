@@ -5,6 +5,7 @@
  */
 package interfaz.controladores;
 
+import interfaz.gestor.GestorInterfaces;
 import interfaz.vistas.VistaModificarLote;
 import java.util.ArrayList;
 import negocio.controladoresCU.CtrlCUModificarLote;
@@ -15,8 +16,8 @@ import negocio.controladoresCU.CtrlCUModificarLote;
  */
 public class CtrlVistaModificarLote {
 
-    private VistaModificarLote vista;
-    private CtrlCUModificarLote controladorCU;
+    private final VistaModificarLote vista;
+    private final CtrlCUModificarLote controladorCU;
     private ArrayList<String> lotes = new ArrayList<>();
     
     public CtrlVistaModificarLote(VistaModificarLote vista) {
@@ -35,7 +36,7 @@ public class CtrlVistaModificarLote {
             if(!lotes.isEmpty()){
                 mostrarLotes(lotes);
             }else{
-                vista.mostrarError("No existe al menos un lote con estado distinto de 'Eliminado' asociado con la planta indicada");
+                vista.mostrarError("No existe un lote distinto de 'Eliminado' para la planta indicada");
             }
         }
     }
@@ -49,14 +50,25 @@ public class CtrlVistaModificarLote {
     }
 
     public void procesaEventoNuevoLoteSeleccionado() {
+        
         int selectedIndex = vista.getIndexLoteSeleccionado();
         vista.mostrarDatosLote(lotes.get((selectedIndex*3)+1),lotes.get((selectedIndex*3)+2));
     }
 
     public void procesaEventoNuevoEstadoSeleccionado() {
+        
         int selectedLote = vista.getLoteSeleccionado();
         int selectedEstado = vista.getEstadoSeleccionado();
         
-        controladorCU.registrarCambioEstado(selectedLote, selectedEstado);
+        if (selectedEstado == 3){
+            
+            controladorCU.actualizacionDeEstimacion(selectedLote, selectedEstado);
+        } else {
+            controladorCU.registrarCambioEstado(selectedLote, selectedEstado);
+        }
+    }
+
+    public void procesaEventoCUActualizacionEstimacion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
