@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import negocio.modelos.Proveedor;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import persistencia.FachadaPersistencia;
 
 /**
  *
