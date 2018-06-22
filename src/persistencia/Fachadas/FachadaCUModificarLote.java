@@ -45,5 +45,9 @@ public class FachadaCUModificarLote {
     public void actualizarEstado(int selectedLote, int selectedEstado) {
         gestorLote.updateLotes(selectedLote, selectedEstado);
     }
+
+    public JSONObject obtenerPlantaCodigo(String plantaDeFlor) {
+        return gestorProducto.readProductoCodigo(plantaDeFlor);
+    }
     
 }

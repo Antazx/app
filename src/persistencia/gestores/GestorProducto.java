@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,29 +51,70 @@ public class GestorProducto {
             
             if(rs.next()){
                 
-                json = new JSONObject();
-                json.put("codigo", rs.getString("CODIGO"));
-                json.put("nombre", rs.getString("NOMBRE"));
-                json.put("descripcion", rs.getString("DESCRIPCION"));
-                json.put("existencias", rs.getInt("EXISTENCIAS"));
-                json.put("cantidad", rs.getInt("CANTIDADNECESARIA"));
-                json.put("precioVenta", rs.getFloat("PRECIODEVENTA"));
-                json.put("precioCompra", rs.getFloat("PRECIOCOMPRA"));
-                json.put("diasEntrega", rs.getInt("DIASPARAENTREGADELPROVEEDOR"));
-                if(rs.getString("TIPODEPRODUCTOAUXILIAR")!=null){
-                    json.put("tipoAuxiliar", rs.getString("TIPODEPRODUCTOAUXILIAR"));
-                }else{
-                    json.put("tipoAuxiliar", "");
-                }
-                json.put("subtipo", rs.getString("SUBTIPO"));
-                //json.put("plantaDeFlor", rs.getString("PLANTADELAFLOR"));
+                json = montarProducto(rs);
                 
             }
             
-        }catch(SQLException | JSONException e){
+        }catch(SQLException e){
+            e.printStackTrace();
         }
         
         return json;
     }
-    
+
+    public JSONObject readProductoCodigo(String plantaDeFlor) {
+        JSONObject json = null;
+        try{
+        
+            PreparedStatement stmt = conn.prepareStatement("select * from PRODUCTO where (CODIGO = ?)");
+            stmt.setString(1,plantaDeFlor);
+            ResultSet rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                
+                json = montarProducto(rs);
+            }
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return json;
+    }
+
+    private JSONObject montarProducto(ResultSet rs) {
+        JSONObject json = new JSONObject();
+        
+        try {
+            
+            
+            json.put("codigo", rs.getString("CODIGO"));
+            json.put("nombre", rs.getString("NOMBRE"));
+            json.put("descripcion", rs.getString("DESCRIPCION"));
+            json.put("existencias", rs.getInt("EXISTENCIAS"));
+            json.put("cantidad", rs.getInt("CANTIDADNECESARIA"));
+            json.put("precioVenta", rs.getFloat("PRECIODEVENTA"));
+            json.put("precioCompra", rs.getFloat("PRECIOCOMPRA"));
+            json.put("diasEntrega", rs.getInt("DIASPARAENTREGADELPROVEEDOR"));
+            json.put("subtipo", rs.getString("SUBTIPO"));
+            
+            if(rs.getString("TIPODEPRODUCTOAUXILIAR")!=null){
+                json.put("tipoAuxiliar", rs.getString("TIPODEPRODUCTOAUXILIAR"));
+            }else{
+                json.put("tipoAuxiliar", "");
+            }
+            
+            if(rs.getString("PLANTADELAFLOR") != null){
+                json.put("plantaDeFlor", rs.getString("PLANTADELAFLOR"));
+            } else {
+                json.put("plantaDeFlor", "");
+            }
+            return json;
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorProducto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JSONException ex) {
+            Logger.getLogger(GestorProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return json;
+    }
 }

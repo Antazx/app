@@ -32,9 +32,22 @@ public class CtrlCUModificarLote {
     }
     
     public ArrayList<String> getLotes() {
+        
         ArrayList<String> lotes = new ArrayList();
         planta = new Producto(plantaJ);
+        
+        try {
+            String plantaDeFlor = plantaJ.getString("plantaDeFlor");
+            if(!plantaDeFlor.equals("")){
+                JSONObject florJ = fachada.obtenerPlantaCodigo(plantaDeFlor);
+                planta.setPlantaDeLaFlor(new Producto(florJ));
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(CtrlCUConsultarFacturas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         codigo = planta.getCodigo();
+        
         JSONArray lotesJ = fachada.getLotes(codigo);
         try {
             for (int i = 0; i < lotesJ.length(); i++){
@@ -54,6 +67,10 @@ public class CtrlCUModificarLote {
 
     public void registrarCambioEstado(int selectedLote, int selectedEstado) {
         fachada.actualizarEstado(selectedLote,selectedEstado);
+    }
+
+    public void actualizacionDeEstimacion(int selectedLote, int selectedEstado) {
+        String subtipo = planta.getSubtipo();
     }
     
     
