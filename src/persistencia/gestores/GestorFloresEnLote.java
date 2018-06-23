@@ -43,17 +43,15 @@ public class GestorFloresEnLote {
 
     public JSONObject obtenerEstimacion(String codigoPlanta, int idLote) {
         JSONObject json = null;
-        System.out.println(codigoPlanta+"   " +idLote+"");
         try{
-        
             PreparedStatement stmt = conn.prepareStatement("select * from FLORESENLOTE where (FLOR = ?) and (LOTE = ?)");
             stmt.setString(1,codigoPlanta);
-            stmt.setInt(1,idLote);
+            stmt.setInt(2,idLote);
             ResultSet rs = stmt.executeQuery();
             
             if(rs.next()){
                 
-                json = montarLote(rs);
+                json = montarFloresEnLote(rs);
             }
             
         }catch(SQLException e){
@@ -62,20 +60,31 @@ public class GestorFloresEnLote {
         return json;
     }
 
-    private JSONObject montarLote(ResultSet rs) {
+    private JSONObject montarFloresEnLote(ResultSet rs) {
         JSONObject json = new JSONObject();
         
         try {
-        
-            json.put("cantidad", rs.getString("CANTIDAD"));
-            json.put("flor", rs.getInt("FLOR"));
-            json.put("lote", rs.getString("LOTE"));
+            json.put("cantidad", rs.getInt("CANTIDAD"));
+            json.put("flor", rs.getString("FLOR"));
+            json.put("lote", rs.getInt("LOTE"));
             
             return json;
         } catch (SQLException | JSONException ex) {
             Logger.getLogger(GestorProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
         return json;
+    }
+
+    public void actualizarEstimacion(String codigoPlanta, int idLote, int estimacionNueva) {
+        try {
+                PreparedStatement stmt = conn.prepareStatement("update FLORESENLOTE set CANTIDAD = ? where FLOR = ? and LOTE = ?");
+                stmt.setInt(1, estimacionNueva);
+                stmt.setString(2, codigoPlanta);
+                stmt.setInt(3, idLote);
+                stmt.executeUpdate();
+            } catch (SQLException ex) {
+            Logger.getLogger(GestorLote.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

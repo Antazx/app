@@ -51,4 +51,8 @@ public class FachadaCUActualizarFlores {
     public JSONObject obtenerLoteId(int idLote) {
         return gestorLote.obtenerLoteId(idLote);
     }
+
+    public void actualizarEstimacion(String codigoPlanta, int idLote, int estimacionNueva) {
+        gestorFloresEnLote.actualizarEstimacion(codigoPlanta, idLote, estimacionNueva);
+    }
 }

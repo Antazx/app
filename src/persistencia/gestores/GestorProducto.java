@@ -57,7 +57,6 @@ public class GestorProducto {
             }
             
         }catch(SQLException e){
-            e.printStackTrace();
         }
         
         return json;

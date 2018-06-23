@@ -16,6 +16,9 @@ public class CtrlVistaActualizarFlores {
 
     private final VistaActualizarFlores vista;
     private final CtrlCUActualizarFlores controladorCU;
+    private String codigoPlanta;
+    private int idLote;
+    private int estimacionNueva;
     
     public CtrlVistaActualizarFlores(VistaActualizarFlores vista) {
         this.vista = vista;
@@ -23,15 +26,27 @@ public class CtrlVistaActualizarFlores {
     }
 
     public void procesaEventoComprobarFlores() {
-        String codigoPlanta = vista.getCodigoPlanta();
+        codigoPlanta = vista.getCodigoPlanta();
         boolean ok = controladorCU.comprobarFlores(codigoPlanta);
     }
 
     public void procesaEventoMostrarEstimacion() {
-        String codigoPlanta = vista.getCodigoPlanta();
-        int idLote = vista.getIdLote();
+        idLote = vista.getIdLote();
         String estimacion = controladorCU.getEstimacionFlores(codigoPlanta, idLote);
         vista.mostrarEstimacion(estimacion);
+    }
+
+    public void procesaEventoActualizarEstimacion() {
+        estimacionNueva = Integer.parseInt(vista.getEstimacion());
+        if(comprobarEstimacion(estimacionNueva)){
+            controladorCU.actualizarEstimacion(codigoPlanta, idLote, estimacionNueva);
+        }else{
+            vista.mostrarError("Las estimacion introducida no es valida");
+        }
+    }
+
+    private boolean comprobarEstimacion(int estimacionNueva) {
+        return estimacionNueva>0;
     }
     
 }

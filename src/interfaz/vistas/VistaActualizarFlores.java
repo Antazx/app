@@ -25,6 +25,7 @@ public class VistaActualizarFlores extends javax.swing.JFrame {
         estimacionActual.setVisible(false);
         estimacionNueva.setVisible(false);
         actualizar.setVisible(false);
+        error.setVisible(false);
     }
 
     /**
@@ -43,11 +44,14 @@ public class VistaActualizarFlores extends javax.swing.JFrame {
         estimacionActual = new javax.swing.JLabel();
         estimacionNueva = new javax.swing.JTextField();
         actualizar = new javax.swing.JButton();
+        error = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Actualizacion de la estimación de flores:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 19, -1, -1));
 
         confirmarEstimacion.setText("Confirmar");
         confirmarEstimacion.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -55,58 +59,27 @@ public class VistaActualizarFlores extends javax.swing.JFrame {
                 confirmarEstimacionMousePressed(evt);
             }
         });
+        getContentPane().add(confirmarEstimacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 166, -1, -1));
 
         labelActual.setText("Estimación actual:");
+        getContentPane().add(labelActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 83, -1, -1));
 
         labelNueva.setText("Estimación nueva:");
+        getContentPane().add(labelNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 118, -1, -1));
+        getContentPane().add(estimacionActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 83, -1, -1));
+        getContentPane().add(estimacionNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 115, 49, -1));
 
         actualizar.setText("Actualizar");
+        actualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                actualizarMousePressed(evt);
+            }
+        });
+        getContentPane().add(actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 166, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(actualizar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(confirmarEstimacion)
-                .addGap(151, 151, 151))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelActual)
-                            .addComponent(labelNueva))
-                        .addGap(43, 43, 43)
-                        .addComponent(estimacionNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(estimacionActual)))
-                .addContainerGap(65, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelActual)
-                    .addComponent(estimacionActual))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNueva)
-                    .addComponent(estimacionNueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(confirmarEstimacion)
-                    .addComponent(actualizar))
-                .addContainerGap(136, Short.MAX_VALUE))
-        );
+        error.setForeground(new java.awt.Color(255, 51, 51));
+        error.setText("Error");
+        getContentPane().add(error, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 146, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,6 +88,12 @@ public class VistaActualizarFlores extends javax.swing.JFrame {
         controlador.procesaEventoComprobarFlores();
         controlador.procesaEventoMostrarEstimacion();
     }//GEN-LAST:event_confirmarEstimacionMousePressed
+
+    private void actualizarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actualizarMousePressed
+        controlador.procesaEventoActualizarEstimacion();
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_actualizarMousePressed
 
     /**
      * @param args the command line arguments
@@ -154,6 +133,7 @@ public class VistaActualizarFlores extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizar;
     private javax.swing.JButton confirmarEstimacion;
+    private javax.swing.JLabel error;
     private javax.swing.JLabel estimacionActual;
     private javax.swing.JTextField estimacionNueva;
     private javax.swing.JLabel jLabel1;
@@ -168,6 +148,10 @@ public class VistaActualizarFlores extends javax.swing.JFrame {
     public String getCodigoPlanta() {
         return "B";
     }
+    
+    public String getEstimacion() {
+        return estimacionNueva.getText();
+    }
 
     public void mostrarEstimacion(String estimacion) {
         labelActual.setVisible(true);
@@ -177,5 +161,10 @@ public class VistaActualizarFlores extends javax.swing.JFrame {
         actualizar.setVisible(true);
         confirmarEstimacion.setVisible(false);
         estimacionActual.setText(estimacion);
+    }
+
+    public void mostrarError(String mensaje) {
+        error.setVisible(true);
+        error.setText(mensaje);
     }
 }

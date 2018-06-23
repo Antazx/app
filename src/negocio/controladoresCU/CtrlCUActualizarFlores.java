@@ -53,5 +53,9 @@ public class CtrlCUActualizarFlores {
         floresEnLote.setLote(lote);
         return floresEnLote.getCantidad()+"";
     }
+
+    public void actualizarEstimacion(String codigoPlanta, int idLote, int estimacionNueva) {
+        fachada.actualizarEstimacion(codigoPlanta, idLote, estimacionNueva);
+    }
     
 }
