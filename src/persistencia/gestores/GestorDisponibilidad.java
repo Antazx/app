@@ -74,7 +74,6 @@ public class GestorDisponibilidad {
         } catch (JSONException ex) {
             Logger.getLogger(GestorDisponibilidad.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("GESTOR DISPONIBILIDAD: " +list.toString());
         return list;
     }
     

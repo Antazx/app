@@ -95,4 +95,8 @@ public class CtrlCUIdentificarse {
                return "La contraseña no es correcta";
             }
     }
+    
+    public Empleado getEmpleadoIdentificado(){
+        return empleadoJ;
+    }
 }

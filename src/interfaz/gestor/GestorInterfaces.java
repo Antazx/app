@@ -26,7 +26,7 @@ public class GestorInterfaces {
     public GestorInterfaces(){}
     
     public static void main(String[] args){
-        GestorInterfaces.getInstancia().muestraInterfazRegistrarVenta();
+        GestorInterfaces.getInstancia().muestraInterfazIdentificarse();
     }
 
     public void empleadoIdentificado(String rol){
@@ -36,16 +36,13 @@ public class GestorInterfaces {
                 //reemplazarVista(new VistaPrincipalSupervisor());
                 break;
             case "Administrativo":
-                
                 reemplazarVista(new VistaConsultarFacturas());
                 break;
             case "Operario":
-                System.out.println("OPERARIO NO IMPLEMENTADO");
-                //reemplazarVista(new VistaPrincipalOperario());
+                reemplazarVista(new VistaModificarLote());
                 break;
             case "Dependiente":
-                System.out.println("DEPENDIENTE NO IMPLEMENTADO");
-                //reemplazarVista(new VistaPrincipalDependiente());
+                reemplazarVista(new VistaRegistrarVenta());
                 break;
         }
     }
@@ -60,15 +57,4 @@ public class GestorInterfaces {
         vistaActual = new VistaIdentificarse();
         vistaActual.setVisible(true);
     }
-    
-    private void muestraInterfazConsultarFacturas() {
-        vistaActual = new VistaConsultarFacturas();
-        vistaActual.setVisible(true);
-    }
-    
-    private void muestraInterfazRegistrarVenta() {
-        vistaActual = new VistaRegistrarVenta();
-        vistaActual.setVisible(true);
-    }
-    
 }

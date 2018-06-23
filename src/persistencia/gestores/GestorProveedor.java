@@ -9,9 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import negocio.modelos.Proveedor;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -41,25 +39,6 @@ public class GestorProveedor {
             return gestorProovedor;
         }
     }
-
-    /*public ArrayList<Proveedor> getProovedores(LocalDate fechaInicio, LocalDate fechaFin) {
-        ArrayList<Proveedor> provs = new ArrayList();
-        
-        //JSONArray consulta = fachada.readProovedores(fechaInicio, fechaFin);
-        
-        try {
-            for(int i = 0; i < consulta.length(); i++){
-        
-            Proveedor pi = new Proveedor(consulta.getJSONObject(i));
-            provs.add(pi);
-            
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        
-        return provs;
-    }*/
 
     public JSONObject readProveedor(String proveedorS) {
         JSONObject json = null;
