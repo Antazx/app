@@ -21,7 +21,7 @@ import persistencia.Fachadas.FachadaCURegistrarVenta;
  */
 public class CtrlCURegistrarVista {
     
-    private FachadaCURegistrarVenta fachada = FachadaCURegistrarVenta.getInstance();
+    private final FachadaCURegistrarVenta fachada = FachadaCURegistrarVenta.getInstance();
     private Producto producto;
     private Venta venta;
     private LineaVenta lVenta;
