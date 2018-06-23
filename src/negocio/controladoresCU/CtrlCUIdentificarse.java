@@ -20,7 +20,7 @@ import persistencia.Fachadas.FachadaCUIdentificarse;
  */
 public class CtrlCUIdentificarse {
     
-    private Empleado empleadoJ;
+    private Empleado empleadoJ; 
     private Rol rolJ;
     private Disponibilidad disponibilidadJ;
     private VinculacionConLaEmpresa vinculacionJ;
@@ -95,6 +95,4 @@ public class CtrlCUIdentificarse {
                return "La contraseña no es correcta";
             }
     }
-
-    
 }

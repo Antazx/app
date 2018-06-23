@@ -26,7 +26,7 @@ public class GestorInterfaces {
     public GestorInterfaces(){}
     
     public static void main(String[] args){
-        GestorInterfaces.getInstancia().muestraInterfazConsultarFacturas();
+        GestorInterfaces.getInstancia().muestraInterfazRegistrarVenta();
     }
 
     public void empleadoIdentificado(String rol){
@@ -66,5 +66,9 @@ public class GestorInterfaces {
         vistaActual.setVisible(true);
     }
     
+    private void muestraInterfazRegistrarVenta() {
+        vistaActual = new VistaRegistrarVenta();
+        vistaActual.setVisible(true);
+    }
     
 }

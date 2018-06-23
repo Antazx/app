@@ -5,17 +5,31 @@
  */
 package interfaz.vistas;
 
+import interfaz.controladores.CtrlVistaRegistrarVenta;
+
 /**
  *
  * @author GUillermo
  */
 public class VistaRegistrarVenta extends javax.swing.JFrame {
-
+    
+    
+    private CtrlVistaRegistrarVenta controlador;
     /**
      * Creates new form VistaRegistrarVenta
      */
     public VistaRegistrarVenta() {
         initComponents();
+        controlador = new CtrlVistaRegistrarVenta(this);
+        error.setVisible(false);
+        finalizarVenta.setVisible(false);
+        facturaSi.setVisible(false);
+        facturaNo.setVisible(false);
+        
+        for(int i = 1; i < 101; i++){
+            cantidadProducto.addItem(i+"");
+        }
+        
     }
 
     /**
@@ -27,21 +41,180 @@ public class VistaRegistrarVenta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        codigoLabel = new javax.swing.JLabel();
+        codigoProducto = new javax.swing.JTextField();
+        cantidadLabel = new javax.swing.JLabel();
+        registrarBoton = new javax.swing.JButton();
+        cancelarBoton = new javax.swing.JButton();
+        error = new javax.swing.JLabel();
+        cantidadProducto = new javax.swing.JComboBox<>();
+        nombreProducto = new javax.swing.JLabel();
+        precioProducto = new javax.swing.JLabel();
+        subtotalVenta = new javax.swing.JLabel();
+        nombre = new javax.swing.JLabel();
+        precio = new javax.swing.JLabel();
+        total = new javax.swing.JLabel();
+        finalizarVenta = new javax.swing.JButton();
+        tot = new javax.swing.JLabel();
+        totalVenta = new javax.swing.JLabel();
+        facturaNo = new javax.swing.JButton();
+        facturaSi = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Registrar Venta: ");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        codigoLabel.setText("Codigo del producto:");
+        jPanel1.add(codigoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 65, -1, -1));
+
+        codigoProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codigoProductoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(codigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 62, 194, -1));
+
+        cantidadLabel.setText("Cantidad:");
+        jPanel1.add(cantidadLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 97, -1, -1));
+
+        registrarBoton.setText("Registrar");
+        registrarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                registrarBotonMousePressed(evt);
+            }
+        });
+        jPanel1.add(registrarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 140, 20));
+
+        cancelarBoton.setText("Cancelar");
+        cancelarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cancelarBotonMousePressed(evt);
+            }
+        });
+        jPanel1.add(cancelarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 132, -1));
+
+        error.setForeground(new java.awt.Color(255, 0, 0));
+        error.setText("Error");
+        jPanel1.add(error, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 318, -1));
+
+        jPanel1.add(cantidadProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 97, 194, -1));
+
+        nombreProducto.setText("Nombre: ");
+        jPanel1.add(nombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 160, 67, -1));
+
+        precioProducto.setText("Precio de venta: ");
+        jPanel1.add(precioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 183, 110, -1));
+
+        subtotalVenta.setText("Subtotal: ");
+        jPanel1.add(subtotalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 206, -1, -1));
+        jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 160, 134, 16));
+        jPanel1.add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 183, 134, 16));
+        jPanel1.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 206, 134, 16));
+
+        finalizarVenta.setText("Finalizar Venta");
+        finalizarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                finalizarVentaMousePressed(evt);
+            }
+        });
+        jPanel1.add(finalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 150, -1));
+
+        tot.setText("Total");
+        jPanel1.add(tot, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 240, -1, -1));
+        jPanel1.add(totalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 140, 20));
+
+        facturaNo.setText("No generar factura");
+        facturaNo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                facturaNoMousePressed(evt);
+            }
+        });
+        jPanel1.add(facturaNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 340, -1));
+
+        facturaSi.setText("Generar factura");
+        facturaSi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                facturaSiMousePressed(evt);
+            }
+        });
+        jPanel1.add(facturaSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 340, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void registrarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarBotonMousePressed
+        // TODO add your handling code here:
+        error.setVisible(false);
+        controlador.procesaEventoRegistrar();
+    }//GEN-LAST:event_registrarBotonMousePressed
+
+    private void codigoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codigoProductoActionPerformed
+
+    private void finalizarVentaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_finalizarVentaMousePressed
+        // TODO add your handling code here:
+        codigoLabel.setVisible(false);
+        cantidadLabel.setVisible(false);
+        codigoProducto.setVisible(false);
+        cantidadProducto.setVisible(false);
+        finalizarVenta.setVisible(false);
+        registrarBoton.setVisible(false);
+        nombre.setVisible(false);
+        precio.setVisible(false);
+        subtotalVenta.setVisible(false);
+        nombreProducto.setVisible(false);
+        precioProducto.setVisible(false);
+        total.setVisible(false);
+        totalVenta.setVisible(false);
+        tot.setVisible(false);
+        facturaSi.setVisible(true);
+        facturaNo.setVisible(true);
+        jLabel1.setText("Necesita factura");
+       
+    }//GEN-LAST:event_finalizarVentaMousePressed
+
+    private void facturaNoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facturaNoMousePressed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_facturaNoMousePressed
+
+    private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
+        // TODO add your handling code here:
+        controlador.cancelarLineasVenta();
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_cancelarBotonMousePressed
+
+    private void facturaSiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facturaSiMousePressed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_facturaSiMousePressed
 
     /**
      * @param args the command line arguments
@@ -79,5 +252,48 @@ public class VistaRegistrarVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelarBoton;
+    private javax.swing.JLabel cantidadLabel;
+    private javax.swing.JComboBox<String> cantidadProducto;
+    private javax.swing.JLabel codigoLabel;
+    private javax.swing.JTextField codigoProducto;
+    private javax.swing.JLabel error;
+    private javax.swing.JButton facturaNo;
+    private javax.swing.JButton facturaSi;
+    private javax.swing.JButton finalizarVenta;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel nombre;
+    private javax.swing.JLabel nombreProducto;
+    private javax.swing.JLabel precio;
+    private javax.swing.JLabel precioProducto;
+    private javax.swing.JButton registrarBoton;
+    private javax.swing.JLabel subtotalVenta;
+    private javax.swing.JLabel tot;
+    private javax.swing.JLabel total;
+    private javax.swing.JLabel totalVenta;
     // End of variables declaration//GEN-END:variables
+
+    public String getCodigo() {
+        return codigoProducto.getText();
+    }
+
+    public int getCantidad() {
+        return cantidadProducto.getSelectedIndex()+1;
+    }
+
+    public void mostrarError(String err) {
+        error.setText(err);
+        error.setVisible(true);
+    }
+
+    public void mostrarRespuesta(String respuesta) {
+        String[] msg = respuesta.split(" ");
+        nombre.setText(msg[0]);
+        precio.setText(msg[1]);
+        total.setText(msg[2]);
+        totalVenta.setText(msg[3]);
+        finalizarVenta.setVisible(true);   
+        
+    }
 }
