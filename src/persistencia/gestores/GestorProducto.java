@@ -32,6 +32,7 @@ public class GestorProducto {
         }catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e){
         }
     }
+    
     public static GestorProducto getInstance() {
         
         if(gestorProducto == null){
@@ -76,7 +77,6 @@ public class GestorProducto {
             }
             
         }catch(SQLException e){
-            e.printStackTrace();
         }
         
         return json;
@@ -86,8 +86,7 @@ public class GestorProducto {
         JSONObject json = new JSONObject();
         
         try {
-            
-            
+           
             json.put("codigo", rs.getString("CODIGO"));
             json.put("nombre", rs.getString("NOMBRE"));
             json.put("descripcion", rs.getString("DESCRIPCION"));
@@ -110,9 +109,7 @@ public class GestorProducto {
                 json.put("plantaDeFlor", "");
             }
             return json;
-        } catch (SQLException ex) {
-            Logger.getLogger(GestorProducto.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JSONException ex) {
+        } catch (SQLException | JSONException ex) {
             Logger.getLogger(GestorProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
         return json;

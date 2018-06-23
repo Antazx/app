@@ -3,16 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="PracticaPGP"/>
-        <group>
-            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/interfaz/controladores/CtrlVistaActualizarFlores.java</file>
-            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/negocio/controladoresCU/CtrlCUActualizarFlores.java</file>
-            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/persistencia/gestores/GestorProducto.java</file>
-            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/interfaz/vistas/VistaActualizarFlores.java</file>
-            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/interfaz/controladores/CtrlVistaModificarLote.java</file>
-            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/negocio/controladoresCU/CtrlCUModificarLote.java</file>
-            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/persistencia/Fachadas/FachadaCUModificarLote.java</file>
-            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/interfaz/vistas/VistaModificarLote.java</file>
-            <file>file:/C:/Users/Dani/Documents/GitHub/app/src/persistencia/Fachadas/FachadaCUActualizarFlores.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

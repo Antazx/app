@@ -5,7 +5,12 @@
  */
 package negocio.controladoresCU;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import negocio.modelos.FloresEnLote;
+import negocio.modelos.Lote;
 import negocio.modelos.Producto;
+import org.json.JSONException;
 import org.json.JSONObject;
 import persistencia.Fachadas.FachadaCUActualizarFlores;
 
@@ -17,12 +22,36 @@ public class CtrlCUActualizarFlores {
 
     FachadaCUActualizarFlores fachada = FachadaCUActualizarFlores.getInstance();
     Producto planta;
+    Lote lote;
+    FloresEnLote floresEnLote;
     JSONObject plantaJ;
+    JSONObject loteJ;
+    JSONObject floresEnLoteJ;
     
     public boolean comprobarFlores(String codigoPlanta) {
         plantaJ = fachada.comprobarFlores(codigoPlanta);
         planta = new Producto(plantaJ);
-        return true;
+        try {
+            String plantaDeFlor = plantaJ.getString("plantaDeFlor");
+            if(!plantaDeFlor.equals("")){
+                JSONObject florJ = fachada.obtenerPlantaCodigo(plantaDeFlor);
+                planta.setPlantaDeLaFlor(new Producto(florJ));
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(CtrlCUConsultarFacturas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String subtipo = planta.getSubtipo();
+        return subtipo.equals("Flor");
+    }
+
+    public String getEstimacionFlores(String codigoPlanta, int idLote) {
+        floresEnLoteJ = fachada.obtenerEstimacion(codigoPlanta, idLote);
+        floresEnLote = new FloresEnLote(floresEnLoteJ);
+        loteJ = fachada.obtenerLoteId(idLote);
+        floresEnLote.setFlor(planta);
+        floresEnLote.setLote(lote);
+        return floresEnLote.getCantidad()+"";
     }
     
 }

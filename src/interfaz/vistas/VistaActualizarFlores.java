@@ -94,7 +94,7 @@ public class VistaActualizarFlores extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1)
                 .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelActual)
                     .addComponent(estimacionActual))
                 .addGap(18, 18, 18)
@@ -113,6 +113,7 @@ public class VistaActualizarFlores extends javax.swing.JFrame {
 
     private void confirmarEstimacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmarEstimacionMousePressed
         controlador.procesaEventoComprobarFlores();
+        controlador.procesaEventoMostrarEstimacion();
     }//GEN-LAST:event_confirmarEstimacionMousePressed
 
     /**
@@ -161,10 +162,20 @@ public class VistaActualizarFlores extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public int getIdLote() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 1;
     }
 
     public String getCodigoPlanta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "B";
+    }
+
+    public void mostrarEstimacion(String estimacion) {
+        labelActual.setVisible(true);
+        labelNueva.setVisible(true);
+        estimacionActual.setVisible(true);
+        estimacionNueva.setVisible(true);
+        actualizar.setVisible(true);
+        confirmarEstimacion.setVisible(false);
+        estimacionActual.setText(estimacion);
     }
 }

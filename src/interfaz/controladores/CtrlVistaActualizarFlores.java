@@ -26,5 +26,12 @@ public class CtrlVistaActualizarFlores {
         String codigoPlanta = vista.getCodigoPlanta();
         boolean ok = controladorCU.comprobarFlores(codigoPlanta);
     }
+
+    public void procesaEventoMostrarEstimacion() {
+        String codigoPlanta = vista.getCodigoPlanta();
+        int idLote = vista.getIdLote();
+        String estimacion = controladorCU.getEstimacionFlores(codigoPlanta, idLote);
+        vista.mostrarEstimacion(estimacion);
+    }
     
 }

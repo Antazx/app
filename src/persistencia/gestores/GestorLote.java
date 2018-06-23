@@ -80,5 +80,27 @@ public class GestorLote {
         }
         
     }
+
+    public JSONObject obtenerLoteId(int idLote) {
+        JSONObject loteJ = null;
+        
+        try {
+            PreparedStatement stmt = conn.prepareStatement("select * from LOTE where (ID = ?)");
+            stmt.setInt(1, idLote);
+            ResultSet rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                loteJ = new JSONObject();
+                loteJ.put("id", rs.getInt("ID"));
+                loteJ.put("cantidad", rs.getInt("CANTIDAD"));
+                loteJ.put("fechaCreacion", rs.getDate("FECHADECREACION"));
+                loteJ.put("estado", rs.getInt("ESTADO"));
+            }
+            
+        } catch (SQLException | JSONException ex) {
+            Logger.getLogger(GestorFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return loteJ;
+    }
     
 }

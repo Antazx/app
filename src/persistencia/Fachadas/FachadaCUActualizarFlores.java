@@ -6,6 +6,7 @@
 package persistencia.Fachadas;
 
 import org.json.JSONObject;
+import persistencia.gestores.GestorFloresEnLote;
 import persistencia.gestores.GestorLote;
 import persistencia.gestores.GestorProducto;
 
@@ -18,11 +19,13 @@ public class FachadaCUActualizarFlores {
     private static FachadaCUActualizarFlores fachada;
     private final GestorProducto gestorProducto;
     private final GestorLote gestorLote;
+    private final GestorFloresEnLote gestorFloresEnLote;
     
     public FachadaCUActualizarFlores() {
         
         gestorProducto = GestorProducto.getInstance();
         gestorLote = GestorLote.getInstance();
+        gestorFloresEnLote = GestorFloresEnLote.getInstance();
         
     }
     
@@ -37,4 +40,15 @@ public class FachadaCUActualizarFlores {
         return gestorProducto.readProductoCodigo(codigoPlanta);
     }
     
+    public JSONObject obtenerPlantaCodigo(String plantaDeFlor) {
+        return gestorProducto.readProductoCodigo(plantaDeFlor);
+    }
+
+    public JSONObject obtenerEstimacion(String codigoPlanta, int idLote) {
+        return gestorFloresEnLote.obtenerEstimacion(codigoPlanta, idLote);
+    }
+
+    public JSONObject obtenerLoteId(int idLote) {
+        return gestorLote.obtenerLoteId(idLote);
+    }
 }
